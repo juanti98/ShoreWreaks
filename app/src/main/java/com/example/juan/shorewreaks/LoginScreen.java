@@ -1,5 +1,6 @@
 package com.example.juan.shorewreaks;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,5 +18,15 @@ public class LoginScreen extends AppCompatActivity {
         setContentView(R.layout.activity_login_screen);
 
         getSupportActionBar().hide();
+
+        Button btnDale = findViewById(R.id.btnDale);
+
+        btnDale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginScreen.this, SingUp.class);
+                startActivity(intent);
+            }
+        });
     }
 }

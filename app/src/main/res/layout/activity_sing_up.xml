@@ -6,6 +6,8 @@
     android:background="@drawable/s">
 
 
+
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="100dp"
@@ -13,7 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:src="@drawable/icon" />
+        android:src="@drawable/aa" />
 
     <LinearLayout
         android:id="@+id/keysLayout"
