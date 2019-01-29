@@ -1,0 +1,94 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/s">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/icon" />
+
+    <LinearLayout
+        android:id="@+id/keysLayout"
+        style="@style/AuthFieldContainer"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="168dp"
+        android:alpha="0.9">
+
+        <EditText
+            android:id="@+id/usernamefield"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/subtitle"
+            android:hint="Username"
+            android:textColorHint="#6400838f"
+            android:textColorLink="@android:color/background_dark"
+            android:textSize="17sp"
+            tools:focusable="false">
+
+            <requestFocus />
+        </EditText>
+
+
+        <EditText
+            android:id="@+id/passwordfield"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/subtitle"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColorHint="@color/focused_purple_button"
+            android:textColorLink="@android:color/holo_blue_bright"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/emailfield"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/subtitle"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:textColorHint="@color/focused_purple_button"
+            android:textColorLink="@color/background_purple"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/signupbutton"
+        style="@style/AuthButton"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="165dp"
+        android:background="@color/colorPrimaryDark"
+        android:elevation="14dp"
+        android:text="@string/signup_button_label"
+        android:textColor="@color/apptheme_color"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/cancelbutton"
+        style="@style/AuthButton"
+
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="94dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="@string/cancel_button_label"
+        android:textColor="@color/apptheme_color"
+        android:textSize="15sp" />
+</RelativeLayout>

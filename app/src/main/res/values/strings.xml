@@ -27,3 +27,33 @@
     <string name="cancel_button_label">cancel</string>
     <string name="slogan">for the planet</string>
 </resources>
+<resources>
+<string name="app_name">ShoreWrecks</string>
+<string name="title_activity_login">Sign in</string>
+
+<!-- Strings related to login -->
+<string name="prompt_email">Email</string>
+<string name="prompt_password">Password (optional)</string>
+<string name="action_sign_in">Sign in or register</string>
+<string name="action_sign_in_short">Sign in or register</string>
+<string name="error_invalid_email">This email address is invalid</string>
+<string name="error_invalid_password">This password is too short</string>
+<string name="error_incorrect_password">This password is incorrect</string>
+<string name="error_field_required">This field is required</string>
+<string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+<string name="title_activity_signup">have you got an account? Register</string>
+<string name="backimage_description">a girl</string>
+<string name="buttonDivider">Button divider</string>
+<string name="subtitle_string">better end</string>
+<string name="username_hint">username</string>
+<string name="LoginButton_text">LOGIN</string>
+<string name="signup_text">have you got an account? Register</string>
+<string name="password_hint">password</string>
+<string name="email_hint">email</string>
+<string name="signup_button_label">email</string>
+<string name="cancel_button_label">cancel</string>
+<string name="slogan">For the planet</string>
+
+</resources>
