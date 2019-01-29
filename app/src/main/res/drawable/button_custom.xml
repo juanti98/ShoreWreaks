@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:values="@colors/holo_orange_dark"
+        android:state_pressed="true" />
+    <item android:values="@colors/focused_purple_button"
+        android:state_focused="true" />
+    <item android:values="@colors/light_purple_button" />
+    </selector>
