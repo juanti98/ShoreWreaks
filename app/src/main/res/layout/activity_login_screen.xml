@@ -19,12 +19,15 @@
         android:src="@drawable/logoshorewreck" />
 
 
-
     <LinearLayout
         android:id="@+id/keysLayout"
         style="@style/AuthFieldContainer"
+        android:layout_width="374dp"
+        android:layout_height="145dp"
         android:layout_below="@id/imageView"
-        android:layout_marginTop="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
         android:alpha="0.9">
 
 
@@ -35,28 +38,34 @@
             android:ems="10"
             android:hint="@string/email_hint"
             android:inputType="textEmailAddress"
-            android:textColorHint="@color/colorAccent" />
+            android:textColorHint="#6400838f"
+            android:textColorLink="@android:color/background_dark"
+            android:textSize="17sp" />
 
         <EditText
             android:id="@+id/passwordTIL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/password_hint"
-            android:textColorHint="@color/colorAccent"
             android:ems="10"
-            android:inputType="textPassword" />
+            android:hint="@string/password_hint"
+            android:inputType="textPassword"
+            android:textColorHint="#6400838f"
+            android:textColorLink="@android:color/background_dark"
+            android:textSize="17sp" />
 
         <Button
             android:id="@+id/btnDale"
             style="@style/AuthButton"
-            android:layout_width="352dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="3dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:autoLink="none"
             android:background="@color/colorPrimaryDark"
             android:text="@string/LoginButton_text"
             android:textAllCaps="false"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/apptheme_color"
+            />
+
     </LinearLayout>
 
 
@@ -73,6 +82,7 @@
         android:layout_marginTop="404dp"
         android:text="@string/signup_text"
         android:textColor="@color/colorPrimaryDark" />
+
     <!--android:onClick="onClick"-->
     <!--android:clickable="true"-->
 

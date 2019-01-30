@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -19,7 +20,7 @@ public class LoginScreen extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        Button btnDale = findViewById(R.id.btnDale);
+        TextView btnDale = (TextView)findViewById(R.id.signup_text);
 
         btnDale.setOnClickListener(new View.OnClickListener() {
             @Override
