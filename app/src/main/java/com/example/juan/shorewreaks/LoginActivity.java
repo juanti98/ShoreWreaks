@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
 //        mUsername.requestFocus();
 
 
-        mLoginButton = (Button) findViewById(R.id.loginbutton);
+        mLoginButton = (Button) findViewById(R.id.btnDale);
       /*  mLoginButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
