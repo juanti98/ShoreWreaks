@@ -22,12 +22,9 @@
     <LinearLayout
         android:id="@+id/keysLayout"
         style="@style/AuthFieldContainer"
-        android:layout_width="374dp"
-        android:layout_height="145dp"
+
         android:layout_below="@id/imageView"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="33dp"
         android:alpha="0.9">
 
 
@@ -56,15 +53,14 @@
         <Button
             android:id="@+id/btnDale"
             style="@style/AuthButton"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="3dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="3dp"
             android:background="@color/colorPrimaryDark"
             android:text="@string/LoginButton_text"
-            android:textAllCaps="false"
-            android:textColor="@color/apptheme_color"
-            />
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textColor="@color/apptheme_color" />
 
     </LinearLayout>
 
@@ -79,9 +75,29 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="94dp"
         android:layout_marginLeft="94dp"
-        android:layout_marginTop="404dp"
+        android:layout_marginTop="418dp"
         android:text="@string/signup_text"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="@color/apptheme_color" />
+
+    <ImageView
+        android:id="@+id/im_google"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="476dp"
+        app:srcCompat="@drawable/search3" />
+
+    <ImageView
+        android:id="@+id/im_face"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="210dp"
+        android:layout_marginTop="475dp"
+        app:srcCompat="@drawable/facebook" />
 
     <!--android:onClick="onClick"-->
     <!--android:clickable="true"-->
