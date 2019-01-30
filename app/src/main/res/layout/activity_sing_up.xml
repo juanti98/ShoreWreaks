@@ -75,7 +75,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="165dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorButton"
         android:elevation="14dp"
         android:text="@string/signup_button_label"
         android:textColor="@color/apptheme_color"
@@ -89,7 +89,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="94dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorButton"
         android:text="@string/cancel_button_label"
         android:textColor="@color/apptheme_color"
         android:textSize="15sp" />
