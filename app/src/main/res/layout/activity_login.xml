@@ -1,23 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:background="@drawable/f31536531d4515021f43389ad4ae6e1d">
-<!--android:background="@drawable/background_fill"-->
-
-
-<!--ImageView
-    android:id="@+id/backgroundImage"
-    android:src="@drawable/girl"
-    android:scaleType="fitStart"
-    android:layout_alignParentLeft="true"
-    android:layout_height="match_parent"
-    android:contentDescription="@string/backimage_description"
     android:layout_width="match_parent"
-    android:layout_alignParentTop="true"
-    android:layout_marginTop="50dp"
-    android:layout_marginBottom="-50dp" /-->
+    android:layout_height="match_parent"
+    android:background="@drawable/f31536531d4515021f43389ad4ae6e1d">
+
 
 
     <ImageView
@@ -29,19 +17,6 @@ android:background="@drawable/f31536531d4515021f43389ad4ae6e1d">
         android:layout_marginTop="39dp"
         android:src="@drawable/logoshorewreck" />
 
-<!--<TextView-->
-<!--android:id="@+id/title"-->
-<!--style="@style/AuthTitle"-->
-<!--android:layout_marginTop="10dp" />-->
-
-<!--<TextView-->
-<!--android:id="@+id/subtitle"-->
-<!--style="@style/AuthTitle"-->
-<!--android:textSize="15sp"-->
-<!--android:layout_below="@id/title"-->
-<!--android:text="@string/slogan"-->
-<!--android:layout_alignParentTop="false"-->
-<!--android:layout_marginTop="0dp" />-->
 
 
     <LinearLayout
@@ -61,7 +36,6 @@ android:background="@drawable/f31536531d4515021f43389ad4ae6e1d">
             app:counterTextAppearance="@style/TextAppearance.Design.Counter"
             app:errorTextAppearance="@style/TextAppearance.Design.Error"
             app:hintTextAppearance="@style/TextAppearance.Design.Hint">
-
 
             <EditText
                 android:id="@+id/email"
@@ -100,7 +74,11 @@ android:background="@drawable/f31536531d4515021f43389ad4ae6e1d">
             android:id="@+id/loginbutton"
             style="@style/AuthButton"
             android:layout_width="352dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:autoLink="none"
             android:text="@string/LoginButton_text"
+            android:textAllCaps="false"
             android:textColor="@color/colorPrimary" />
     </LinearLayout>
 
@@ -113,12 +91,13 @@ android:background="@drawable/f31536531d4515021f43389ad4ae6e1d">
         android:layout_alignParentLeft="true"
 
         android:layout_alignParentTop="true"
-        android:layout_marginStart="92dp"
-        android:layout_marginLeft="92dp"
-        android:layout_marginTop="387dp"
+        android:layout_marginStart="94dp"
+        android:layout_marginLeft="94dp"
+        android:layout_marginTop="404dp"
         android:text="@string/signup_text"
         android:textColor="@color/colorButton" />
-<!--android:onClick="onClick"-->
-<!--android:clickable="true"-->
+    <!--android:onClick="onClick"-->
+    <!--android:clickable="true"-->
 
 </RelativeLayout>
+
