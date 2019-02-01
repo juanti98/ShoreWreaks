@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".NavigationDrawer"
+            android:label="@string/title_activity_navigation_drawer"></activity>
+        <activity
             android:name=".SplashScreen"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -18,8 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SingUp"></activity>
-        <activity android:name=".LoginScreen"></activity>
+        <activity android:name=".SingUp" />
+        <activity android:name=".LoginScreen" />
     </application>
 
 </manifest>
