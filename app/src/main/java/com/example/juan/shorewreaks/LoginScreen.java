@@ -20,9 +20,9 @@ public class LoginScreen extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        TextView btnDale = (TextView)findViewById(R.id.signup_text);
+        TextView btnSingUp = (TextView)findViewById(R.id.signup_text);
 
-        btnDale.setOnClickListener(new View.OnClickListener() {
+        btnSingUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginScreen.this, SingUp.class);

@@ -80,7 +80,7 @@
         android:textColor="@color/apptheme_color" />
 
     <ImageView
-        android:id="@+id/im_google"
+        android:id="@+id/imgGoogle"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
@@ -90,7 +90,7 @@
         app:srcCompat="@drawable/search3" />
 
     <ImageView
-        android:id="@+id/im_face"
+        android:id="@+id/imgFace"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
