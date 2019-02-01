@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "45561172240",
+    "firebase_url": "https://shorewreaks-3368b.firebaseio.com",
+    "project_id": "shorewreaks-3368b",
+    "storage_bucket": "shorewreaks-3368b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:45561172240:android:4249b2a2429d8ff4",
+        "android_client_info": {
+          "package_name": "com.example.juan.shorewreaks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "45561172240-f395ph965lk8u6pj77stqf6dgboqvtq4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDE5qtCtdQJPTuGUE-LVv5INbu-0cqOS44"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
