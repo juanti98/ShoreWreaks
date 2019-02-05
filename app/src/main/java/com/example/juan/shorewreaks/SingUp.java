@@ -84,17 +84,6 @@ public class SingUp extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        updateUI(account);
     }
 
-    private void updateUI(GoogleSignInAccount account) {
-        if (account != null){
-            Intent intent = new Intent(SingUp.this, LoginScreen.class);
-            startActivity(intent);
-        }
-        else{
-            Intent intent = new Intent(SingUp.this, SingUp.class);
-            startActivity(intent);
-        }
-    }
 }
