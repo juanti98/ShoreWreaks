@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">ShoreWreck</string>
     <string name="title_activity_login">Sign in</string>
+    <string name="facebook_app_id">2259923267630702</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

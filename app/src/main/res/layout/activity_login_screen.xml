@@ -89,10 +89,10 @@
         android:layout_marginTop="476dp"
         app:srcCompat="@drawable/search3" />
 
-    <ImageView
+    <com.facebook.login.widget.LoginButton
         android:id="@+id/im_face"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="142dp"
+        android:layout_height="51dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="210dp"
@@ -101,5 +101,9 @@
 
     <!--android:onClick="onClick"-->
     <!--android:clickable="true"-->
-
+        <Button
+            android:onClick="logout"
+            android:text="logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 </RelativeLayout>
