@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".SignIn"></activity>
         <activity
             android:name=".SplashScreen"
             android:screenOrientation="portrait">
@@ -18,8 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SingUp"></activity>
-        <activity android:name=".LoginScreen"></activity>
+        <activity android:name=".SingUp" />
+        <activity android:name=".LoginScreen" />
     </application>
 
 </manifest>
