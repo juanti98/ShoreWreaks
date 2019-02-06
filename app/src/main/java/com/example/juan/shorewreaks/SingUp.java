@@ -96,7 +96,7 @@ public class SingUp extends AppCompatActivity implements GoogleApiClient.OnConne
         singUpGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Intent intent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApliClient);
+                // Intent intent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApliClient);
                 Intent intent = mGoogleSignInClient.getSignInIntent();
                 startActivityForResult(intent, RC_SIGN_IN);
             }
@@ -138,6 +138,12 @@ public class SingUp extends AppCompatActivity implements GoogleApiClient.OnConne
                 });
     }
 
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+//      startActivityForResult(signInIntent, LoginScreen.class);
+    }
+
+    
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
@@ -174,6 +180,8 @@ public class SingUp extends AppCompatActivity implements GoogleApiClient.OnConne
   /*  @Override
     protected void onStart() {
         super.onStart();
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+
         FirebaseUser currentUser = mAuth.getCurrentUser();
         firebaseAuth.addAuthStateListener(firebaseAuthListener);
     }
@@ -202,5 +210,6 @@ public class SingUp extends AppCompatActivity implements GoogleApiClient.OnConne
 
     }
 */
+
 
 }
