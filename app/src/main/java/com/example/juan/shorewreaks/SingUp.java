@@ -18,6 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.Api;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -45,7 +46,6 @@ public class SingUp extends AppCompatActivity implements GoogleApiClient.OnConne
 
 
     private EditText etUsername, etEmail, etPassword;
-    private ImageView singUpGoogle;
     private GoogleSignInClient mGoogleSignInClient;
     private GoogleApiClient mGoogleApliClient;
     private FirebaseAuth mAuth;
