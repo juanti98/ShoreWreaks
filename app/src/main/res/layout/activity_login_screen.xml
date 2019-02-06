@@ -89,8 +89,8 @@
         android:layout_marginTop="476dp"
         app:srcCompat="@drawable/search3" />
 
-    <ImageView
-        android:id="@+id/imgFace"
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/btnFacebook"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
@@ -99,6 +99,13 @@
         android:layout_marginTop="475dp"
         app:srcCompat="@drawable/facebook" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnFacebook"
+        android:layout_marginTop="-525dp"
+        android:onClick="logout"
+        android:text="logout" />
     <!--android:onClick="onClick"-->
     <!--android:clickable="true"-->
 
