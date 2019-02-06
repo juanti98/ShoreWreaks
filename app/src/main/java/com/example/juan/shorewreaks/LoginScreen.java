@@ -24,7 +24,6 @@ public class LoginScreen extends AppCompatActivity {
     private Button btnSignIn;
     private EditText etEmail, etPassword;
     private Context context;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +82,9 @@ public class LoginScreen extends AppCompatActivity {
 
                             Intent intent2 = new Intent(context, MainScreen.class);
                             startActivity(intent2);
+
+                            etEmail.setText("");
+                            etPassword.setText("");
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(LoginScreen.this, "Email or Password is incorrect",
