@@ -23,17 +23,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class MainScreen extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    ListView lv_ranking;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        lv_ranking = findViewById(R.id.lv_ranking_playas);
+        //cargarDatos();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +58,11 @@ public class MainScreen extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    /*private void cargarDatos() {
+
+        Adaptador adaptador = new Adaptador(this, lista_rankings);
+    }
+*/
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -92,11 +101,11 @@ public class MainScreen extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_home) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_perfil) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_playas) {
 
         } else if (id == R.id.nav_manage) {
 

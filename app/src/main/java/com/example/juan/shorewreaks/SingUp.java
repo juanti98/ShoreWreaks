@@ -160,6 +160,7 @@ public class SingUp extends AppCompatActivity implements GoogleApiClient.OnConne
     private void handleSignInResult(GoogleSignInResult resultado) {
         if (resultado.isSuccess()) {
             goMainScreen();
+            Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "No se puede inciar sesión", Toast.LENGTH_SHORT).show();
 
