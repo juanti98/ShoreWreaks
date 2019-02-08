@@ -8,9 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -18,7 +20,9 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -29,6 +33,10 @@ public class LoginScreen extends AppCompatActivity {
     private Button btnSignIn;
     private EditText etEmail, etPassword;
     private Context context;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener firebaseAuthListener;
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +44,7 @@ public class LoginScreen extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         btnSignIn = findViewById(R.id.btnLogin);
-
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
 
@@ -50,7 +58,8 @@ public class LoginScreen extends AppCompatActivity {
         loginButton .registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                goMainScreen();
+                handleFacebookAccessToken(loginResult.getAccessToken());
+
             }
 
             @Override
@@ -87,13 +96,41 @@ public class LoginScreen extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    //goMainScreen();
+                }
+            }
+        };
+    }
+    private void handleFacebookAccessToken(@NonNull AccessToken accessToken) {
+        loginButton.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+        AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
+        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (!task.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "Fail", Toast.LENGTH_LONG).show();
+
+                }else{
+                    goMainScreen();
+                    progressBar.setVisibility(View.GONE);
+                    loginButton.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });
     }
 
     @Override
-    public void onStart() {
+    protected void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        firebaseAuth.addAuthStateListener(firebaseAuthListener);
     }
 
     public void signIn(String email, String password){
@@ -112,6 +149,7 @@ public class LoginScreen extends AppCompatActivity {
 
                             etEmail.setText("");
                             etPassword.setText("");
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(LoginScreen.this, "Email or Password is incorrect",
@@ -122,15 +160,25 @@ public class LoginScreen extends AppCompatActivity {
                         // ...
                     }
                 });
+
     }
     private void goMainScreen(){
-        Intent intent = new Intent(this, SingUp.class);
+        Intent intent = new Intent(this, MainScreen.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode, data);
         callbackManager.onActivityResult(requestCode,resultCode,data);
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        firebaseAuth.removeAuthStateListener(firebaseAuthListener);
     }
 }
