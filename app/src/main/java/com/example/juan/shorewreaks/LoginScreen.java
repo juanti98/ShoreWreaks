@@ -50,7 +50,7 @@ public class LoginScreen extends AppCompatActivity {
                 password = etPassword.getText().toString();
 
                 signIn(email, password);
-                
+
             }
         });
 
