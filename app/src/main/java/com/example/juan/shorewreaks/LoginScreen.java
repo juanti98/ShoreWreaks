@@ -37,6 +37,7 @@ public class LoginScreen extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private ProgressBar progressBar;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

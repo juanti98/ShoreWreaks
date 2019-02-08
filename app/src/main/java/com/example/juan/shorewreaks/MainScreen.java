@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
@@ -33,15 +34,17 @@ import com.google.firebase.auth.FirebaseUser;
 
 
 public class MainScreen extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private Button bt_logout;
+    private Context c;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
-
+        bt_logout = findViewById(R.id.bt_logout);
         nameTextView = (TextView) findViewById(R.id.nameTextView);
         emailTextView = (TextView) findViewById(R.id.emailTextView);
         uidTextView = (TextView) findViewById(R.id.uidTextView);
-
+        c = this;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
@@ -57,7 +60,14 @@ public class MainScreen extends AppCompatActivity implements NavigationView.OnNa
             goLoginScreen();
         }
 
-
+        bt_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(c, LoginScreen.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -154,4 +164,5 @@ public class MainScreen extends AppCompatActivity implements NavigationView.OnNa
             LoginManager.getInstance().logOut();
 
         }
+
 }

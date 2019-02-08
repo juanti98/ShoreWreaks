@@ -33,6 +33,7 @@
             android:textSize="16sp" />
 
         <Button
+            android:id="@+id/bt_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="logout"
