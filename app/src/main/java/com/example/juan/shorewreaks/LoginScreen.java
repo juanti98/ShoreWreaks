@@ -10,10 +10,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -30,9 +32,11 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
@@ -44,6 +48,9 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
     private Button btnSignIn;
     private EditText etEmail, etPassword;
     private Context context;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener firebaseAuthListener;
+    private ProgressBar progressBar;
     private static final int RC_SIGN_IN = 777;
     private static final String TAG = "GoogleActivity";
     private ImageView singUpGoogle;
@@ -60,7 +67,7 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
 
         mAuth = FirebaseAuth.getInstance();
         btnSignIn = findViewById(R.id.btnLogin);
-
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
 
@@ -107,7 +114,8 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
         loginButton .registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                goMainScreen();
+                handleFacebookAccessToken(loginResult.getAccessToken());
+
             }
 
             @Override
@@ -133,6 +141,7 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
                 password = etPassword.getText().toString();
 
                 signIn(email, password);
+
             }
         });
 
@@ -143,13 +152,41 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
                 startActivity(intent);
             }
         });
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    //goMainScreen();
+                }
+            }
+        };
+    }
+    private void handleFacebookAccessToken(@NonNull AccessToken accessToken) {
+        loginButton.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+        AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
+        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (!task.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "Fail", Toast.LENGTH_LONG).show();
+
+                }else{
+                    goMainScreen();
+                    progressBar.setVisibility(View.GONE);
+                    loginButton.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });
     }
 
     @Override
-    public void onStart() {
+    protected void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        firebaseAuth.addAuthStateListener(firebaseAuthListener);
     }
 
     public void signIn(String email, String password){
@@ -168,6 +205,7 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
 
                             etEmail.setText("");
                             etPassword.setText("");
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(LoginScreen.this, "Email or Password is incorrect",
@@ -178,12 +216,16 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
                         // ...
                     }
                 });
+
     }
     private void goMainScreen(){
-        Intent intent = new Intent(this, SingUp.class);
+        Intent intent = new Intent(this, MainScreen.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
+
+
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
@@ -208,6 +250,13 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
             }
             // handleSignInResult(task);
         }
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        firebaseAuth.removeAuthStateListener(firebaseAuthListener);
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
