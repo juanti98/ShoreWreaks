@@ -42,7 +42,7 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.concurrent.TimeUnit;
 
-public class SingUp extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+public class SingUp extends AppCompatActivity {
     private Button mCancelButton;
     private Button mSingupButton;
     private ImageView singUpGoogle;
@@ -68,22 +68,6 @@ public class SingUp extends AppCompatActivity implements GoogleApiClient.OnConne
         mAuth = FirebaseAuth.getInstance();
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
-        GoogleSignInOptions gso = new GoogleSignInOptions
-                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("45561172240-20h1qogc0tkdjegb3usq3e80n6r39suo.apps.googleusercontent.com")
-                .requestEmail()
-                .build();
-        mGoogleApliClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();mGoogleApliClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-
         c = this;
 
 
@@ -94,7 +78,6 @@ public class SingUp extends AppCompatActivity implements GoogleApiClient.OnConne
 
         mCancelButton = (Button)findViewById(R.id.btnCancel);
         mSingupButton = (Button)findViewById(R.id.btnSingUp);
-        singUpGoogle = (ImageView) findViewById(R.id.imgGoogle);
         SignInButton signInButton = findViewById(R.id.sign_in_button);
 
 
@@ -112,15 +95,6 @@ public class SingUp extends AppCompatActivity implements GoogleApiClient.OnConne
             }
         });
 
-        //Sign Up with Google
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Intent intent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApliClient);
-                Intent intent = mGoogleSignInClient.getSignInIntent();
-                startActivityForResult(intent, RC_SIGN_IN);
-            }
-        });
 
 //        cancel button
         mCancelButton.setOnClickListener(new View.OnClickListener() {
@@ -158,68 +132,7 @@ public class SingUp extends AppCompatActivity implements GoogleApiClient.OnConne
                 });
     }
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RC_SIGN_IN) {
-            //GoogleSignIn.getSignedInAccountFromIntent(data);
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);
-            } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed", e);
-                // ...
-            }
-           // handleSignInResult(task);
-        }
-
-
-    }
-
-    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
-        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                            Log.d(TAG,"signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            goLoginScreen();
-                        }
-                        else {
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Snackbar.make(findViewById(R.id.sign_in_button), "Authentication Failed", Snackbar.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
-
-    /* private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-         try {
-             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-             goLoginScreen();
-
-         } catch (ApiException e) {
-             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
-         }
-     }
- */
-    private void goLoginScreen() {
-        Intent intent = new Intent(this, MainScreen.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
  /*   public void logout(View view){
         LoginManager.getInstance().logOut();
         goLoginScreen();
