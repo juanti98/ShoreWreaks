@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "45561172240-9e6chk7pt2v4784ptovvktu3dganvflv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.juan.shorewreaks",
+            "certificate_hash": "a71c07c5b6cd8b27c103ae309621a65945d77c84"
+          }
+        },
+        {
+          "client_id": "45561172240-45f9o7l8fb9r8nuseig0ar66nvmcut0k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.juan.shorewreaks",
+            "certificate_hash": "204b6774110b8191ea2ff961e1d87403d1b6da48"
+          }
+        },
+        {
           "client_id": "45561172240-f395ph965lk8u6pj77stqf6dgboqvtq4.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +45,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "45561172240-f395ph965lk8u6pj77stqf6dgboqvtq4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
