@@ -23,7 +23,7 @@
     <string name="signup_text">have you got an account? Register</string>
     <string name="password_hint">password</string>
     <string name="email_hint">email</string>
-    <string name="signup_button_label">email</string>
+    <string name="signup_button_label">SignUp</string>
     <string name="cancel_button_label">Cancel</string>
     <string name="slogan">for the planet</string>
     <string name="title_activity_main_screen">MainScreen</string>

@@ -54,7 +54,7 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
     private static final int RC_SIGN_IN = 777;
     private static final String TAG = "GoogleActivity";
     private ImageView singUpGoogle;
-
+    private TextView tvSignUp;
     private GoogleSignInClient mGoogleSignInClient;
     private GoogleApiClient mGoogleApliClient;
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -70,7 +70,7 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
-
+        tvSignUp = findViewById(R.id.signup_text);
         context = this;
 
         //GOOGLE
@@ -145,7 +145,7 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
             }
         });
 
-        btnSingUp.setOnClickListener(new View.OnClickListener() {
+        tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginScreen.this, SingUp.class);
