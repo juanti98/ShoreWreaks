@@ -25,17 +25,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-
-public class MainScreen extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainScreen extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
+    private ListView lv_ranking;
     private Button bt_logout;
     private Context c;
+    private TextView nameTextView;
+    private TextView emailTextView;
+    private TextView uidTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +76,9 @@ public class MainScreen extends AppCompatActivity implements NavigationView.OnNa
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        lv_ranking = findViewById(R.id.lv_ranking_playas);
+        //cargarDatos();
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()
         {
@@ -91,6 +99,11 @@ public class MainScreen extends AppCompatActivity implements NavigationView.OnNa
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    /*private void cargarDatos() {
+
+        Adaptador adaptador = new Adaptador(this, lista_rankings);
+    }
+*/
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -129,11 +142,11 @@ public class MainScreen extends AppCompatActivity implements NavigationView.OnNa
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_home) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_perfil) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_playas) {
 
         } else if (id == R.id.nav_manage) {
 
@@ -147,11 +160,6 @@ public class MainScreen extends AppCompatActivity implements NavigationView.OnNa
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-        private TextView nameTextView;
-        private TextView emailTextView;
-        private TextView uidTextView;
-
-
 
         private void goLoginScreen() {
             Intent intent = new Intent(this, MainScreen.class);
