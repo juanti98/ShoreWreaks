@@ -103,11 +103,9 @@ public class SingUp extends AppCompatActivity implements GoogleApiClient.OnConne
             }
         });
 
-        if (AccessToken.getCurrentAccessToken() == null) {
-            goLoginScreen();
-
-
-        }
+        //if (AccessToken.getCurrentAccessToken() == null) {
+        //    goLoginScreen();
+        //}
     }
     private void createAccount(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
