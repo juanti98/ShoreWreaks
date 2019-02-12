@@ -105,7 +105,8 @@
         android:layout_below="@+id/btnFacebook"
         android:layout_marginTop="-483dp"
         android:onClick="logout"
-        android:text="logout" />
+        android:text="logout"
+        android:visibility="invisible" />
     <!--android:onClick="onClick"-->
     <!--android:clickable="true"-->
     <ProgressBar
