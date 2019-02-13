@@ -69,22 +69,6 @@ public class SingUp extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
-        GoogleSignInOptions gso = new GoogleSignInOptions
-                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("45561172240-20h1qogc0tkdjegb3usq3e80n6r39suo.apps.googleusercontent.com")
-                .requestEmail()
-                .build();
-        mGoogleApliClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();mGoogleApliClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-
         c = this;
 
         etUsername = findViewById(R.id.etUserName);

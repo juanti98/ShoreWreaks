@@ -45,4 +45,5 @@
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
     <string name="facebook_app_id">2259923267630702</string>
     <string name="nav_menu_inicio">Inicio</string>
+    <string name="forgotPassword">Forgot your password?</string>
 </resources>

@@ -40,39 +40,32 @@ public class MainScreen extends AppCompatActivity
     private TextView nameTextView;
     private TextView emailTextView;
     private TextView uidTextView;
-
+    private TextView tvNombreUser, tvEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
-        bt_logout = findViewById(R.id.bt_logout);
+
         nameTextView = (TextView) findViewById(R.id.nameTextView);
         emailTextView = (TextView) findViewById(R.id.emailTextView);
         uidTextView = (TextView) findViewById(R.id.uidTextView);
+
+
+
+
         c = this;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (user != null) {
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            Uri photoUrl = user.getPhotoUrl();
-            String uid = user.getUid();
 
-            nameTextView.setText(name);
-            emailTextView.setText(email);
-            uidTextView.setText(uid);
-        } else {
-            goLoginScreen();
-        }
 
-        bt_logout.setOnClickListener(new View.OnClickListener() {
+       /* bt_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(c, LoginScreen.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
-        });
+        });*/
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -84,7 +77,7 @@ public class MainScreen extends AppCompatActivity
         {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "No está disponible", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -97,7 +90,30 @@ public class MainScreen extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        cambioVista();
+        if (user != null) {
+            String name = user.getDisplayName();
+            String email = user.getEmail();
+            Uri photoUrl = user.getPhotoUrl();
+            String uid = user.getUid();
+
+            nameTextView.setText(name);
+            tvNombreUser.setText(name);
+            emailTextView.setText(email);
+            tvEmail.setText(email);
+            uidTextView.setText(uid);
+        } else {
+            goLoginScreen();
+        }
     }
+
+    private void cambioVista() {
+        LayoutInflater inflador = LayoutInflater.from(this);
+        View vista = inflador.inflate(R.layout.nav_header_main, null);
+        tvNombreUser = vista.findViewById(R.id.tv_nombreUser);
+        tvEmail = vista.findViewById(R.id.tv_email_header);
+    }
+
 
     /*private void cargarDatos() {
 
@@ -155,6 +171,11 @@ public class MainScreen extends AppCompatActivity
         } else if (id == R.id.nav_send) {
 
         }
+        else if (id == R.id.logOut) {
+            Intent intent = new Intent(c, LoginScreen.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -162,15 +183,12 @@ public class MainScreen extends AppCompatActivity
     }
 
         private void goLoginScreen() {
+            FirebaseAuth.getInstance().signOut();
+            LoginManager.getInstance().logOut();
             Intent intent = new Intent(this, MainScreen.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
 
-        public void logout(View view) {
-            FirebaseAuth.getInstance().signOut();
-            LoginManager.getInstance().logOut();
-
-        }
 
 }
