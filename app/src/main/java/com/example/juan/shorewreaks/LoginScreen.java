@@ -67,7 +67,6 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
 
         mAuth = FirebaseAuth.getInstance();
         btnSignIn = findViewById(R.id.btnLogin);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         tvSignUp = findViewById(R.id.signup_text);

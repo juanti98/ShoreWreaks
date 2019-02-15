@@ -79,25 +79,42 @@
         android:text="@string/signup_text"
         android:textColor="@color/apptheme_color" />
 
+    <TextView
+        android:id="@+id/forgottPassword"
+        android:layout_width="191dp"
+        android:layout_height="29dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="123dp"
+        android:layout_marginLeft="123dp"
+        android:layout_marginTop="451dp"
+
+        android:text="@string/forgotPassword"
+        android:textColor="@color/apptheme_color" />
+
     <com.facebook.login.widget.LoginButton
         android:id="@+id/btnFacebook"
-        android:layout_width="142dp"
-        android:layout_height="42dp"
-        android:layout_alignParentStart="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="216dp"
-        android:layout_marginTop="457dp"
-        app:srcCompat="@drawable/facebook" />
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="498dp"
+        android:layout_toEndOf="@+id/sign_in_button"
+        android:textAlignment="textStart" />
 
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
-        android:layout_width="163dp"
-        android:layout_height="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="452dp"></com.google.android.gms.common.SignInButton>
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="491dp"
+        android:visibility="visible">
+
+    </com.google.android.gms.common.SignInButton>
 
     <Button
         android:layout_width="wrap_content"
@@ -109,14 +126,5 @@
         android:visibility="invisible" />
     <!--android:onClick="onClick"-->
     <!--android:clickable="true"-->
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:indeterminate="true"
-        android:visibility="gone" />
 
 </RelativeLayout>
