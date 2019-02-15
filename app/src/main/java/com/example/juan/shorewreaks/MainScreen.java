@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -32,8 +33,16 @@ import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import ai.api.AIListener;
+import ai.api.android.AIConfiguration;
+import ai.api.android.AIService;
+import ai.api.model.AIError;
+import ai.api.model.AIResponse;
+import ai.api.model.Result;
+import androidx.annotation.RequiresApi;
+
 public class MainScreen extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, AIListener {
     private ListView lv_ranking;
     private Button bt_logout;
     private Context c;
@@ -41,6 +50,11 @@ public class MainScreen extends AppCompatActivity
     private TextView emailTextView;
     private TextView uidTextView;
     private TextView tvNombreUser, tvEmail;
+
+    private AIService mAIService;
+    private TextToSpeech mTextToSpeech;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,13 +64,25 @@ public class MainScreen extends AppCompatActivity
         emailTextView = (TextView) findViewById(R.id.emailTextView);
         uidTextView = (TextView) findViewById(R.id.uidTextView);
 
-
-
+        cambioVista();
 
         c = this;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+        if (user != null) {
+            String name = user.getDisplayName();
+            String email = user.getEmail();
+            Uri photoUrl = user.getPhotoUrl();
+            String uid = user.getUid();
 
+            nameTextView.setText(name);
+            tvNombreUser.setText(name);
+            emailTextView.setText(email);
+            tvEmail.setText(email);
+            uidTextView.setText(uid);
+        } else {
+            goLoginScreen();
+        }
 
        /* bt_logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +98,7 @@ public class MainScreen extends AppCompatActivity
         lv_ranking = findViewById(R.id.lv_ranking_playas);
         //cargarDatos();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -80,7 +106,28 @@ public class MainScreen extends AppCompatActivity
                 Snackbar.make(view, "No está disponible", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
+        });*/
+
+        final AIConfiguration config = new AIConfiguration("499ca68207fa404a94eed99ecdd26d17",
+                AIConfiguration.SupportedLanguages.Spanish,
+                AIConfiguration.RecognitionEngine.System);
+
+        mAIService = AIService.getService(this, config);
+        mAIService.setListener(this);
+        mTextToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+
+            }
         });
+
+        findViewById(R.id.fab_microfono).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAIService.startListening();
+            }
+        });
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -90,21 +137,6 @@ public class MainScreen extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        cambioVista();
-        if (user != null) {
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            Uri photoUrl = user.getPhotoUrl();
-            String uid = user.getUid();
-
-            nameTextView.setText(name);
-            tvNombreUser.setText(name);
-            emailTextView.setText(email);
-            tvEmail.setText(email);
-            uidTextView.setText(uid);
-        } else {
-            goLoginScreen();
-        }
     }
 
     private void cambioVista() {
@@ -191,4 +223,38 @@ public class MainScreen extends AppCompatActivity
         }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public void onResult(AIResponse result) {
+        Result response = result.getResult();
+
+        mTextToSpeech.speak(response.getFulfillment().getSpeech(), TextToSpeech.QUEUE_FLUSH, null, null);
+
+
+    }
+
+    @Override
+    public void onError(AIError error) {
+
+    }
+
+    @Override
+    public void onAudioLevel(float level) {
+
+    }
+
+    @Override
+    public void onListeningStarted() {
+
+    }
+
+    @Override
+    public void onListeningCanceled() {
+
+    }
+
+    @Override
+    public void onListeningFinished() {
+
+    }
 }

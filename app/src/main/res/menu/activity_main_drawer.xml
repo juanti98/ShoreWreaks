@@ -16,7 +16,7 @@
             android:title="Mi perfil" />
         <item
             android:id="@+id/nav_playas"
-            android:icon="@android:drawable/ic_menu_mylocation"
+            android:icon="@drawable/placeholder"
             android:title="Mis playas" />
         <item
             android:id="@+id/nav_manage"
@@ -36,7 +36,8 @@
                 android:title="Send" />
             <item
                 android:id="@+id/logOut"
-                android:title="Cerrar sesión"/>
+                android:icon="@drawable/powerbuttonoff"
+                android:title="Cerrar sesión" />
 
         </menu>
 
