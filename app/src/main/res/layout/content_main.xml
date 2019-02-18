@@ -18,37 +18,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="278dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/nameTextView"
-            android:layout_width="178dp"
-            android:layout_height="wrap_content"
-            android:text="Nombre"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/emailTextView"
-            android:layout_width="218dp"
-            android:layout_height="wrap_content"
-            android:text="Email"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/uidTextView"
-            android:layout_width="143dp"
-            android:layout_height="wrap_content"
-            android:text="UID"
-            android:textSize="14sp" />
-
-    </LinearLayout>
 
     <ListView
         android:id="@+id/lv_noticias"

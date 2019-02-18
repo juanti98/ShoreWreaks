@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.support.design.snackbar.ContentViewCallback;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -18,6 +19,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,12 +28,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Button;
 import android.widget.TextView;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import org.junit.experimental.categories.IncludeCategories;
 
 import ai.api.AIListener;
 import ai.api.android.AIConfiguration;
@@ -46,9 +51,8 @@ public class MainScreen extends AppCompatActivity
     private ListView lv_ranking;
     private Button bt_logout;
     private Context c;
-    private TextView nameTextView;
-    private TextView emailTextView;
-    private TextView uidTextView;
+    private TextView tv_nombre1,tv_nombre2,tv_nombre3,tv_titulo;
+    private ImageView img_copa;
     private TextView tvNombreUser, tvEmail;
 
     private AIService mAIService;
@@ -60,11 +64,8 @@ public class MainScreen extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
-        nameTextView = (TextView) findViewById(R.id.nameTextView);
-        emailTextView = (TextView) findViewById(R.id.emailTextView);
-        uidTextView = (TextView) findViewById(R.id.uidTextView);
+        cambioVistaUser();
 
-        cambioVista();
 
         c = this;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -75,38 +76,18 @@ public class MainScreen extends AppCompatActivity
             Uri photoUrl = user.getPhotoUrl();
             String uid = user.getUid();
 
-            nameTextView.setText(name);
+
             tvNombreUser.setText(name);
-            emailTextView.setText(email);
+
             tvEmail.setText(email);
-            uidTextView.setText(uid);
+
         } else {
             goLoginScreen();
         }
 
-       /* bt_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(c, LoginScreen.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-        });*/
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        lv_ranking = findViewById(R.id.lv_ranking_playas);
-        //cargarDatos();
-
-       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "No está disponible", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
 
         final AIConfiguration config = new AIConfiguration("499ca68207fa404a94eed99ecdd26d17",
                 AIConfiguration.SupportedLanguages.Spanish,
@@ -137,13 +118,47 @@ public class MainScreen extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        cargarRanking();
     }
 
-    private void cambioVista() {
+    private void cargarRanking() {
+        //  LayoutInflater inflater = (LayoutInflater)this.getSystemService (Context.LAYOUT_INFLATER_SERVICE);
+
         LayoutInflater inflador = LayoutInflater.from(this);
+        View vista = inflador.inflate(R.layout.activity_ranking, null);
+
+        tv_titulo = (TextView)vista.findViewById(R.id.tv_titulo);
+        img_copa = vista.findViewById(R.id.img_copa);
+        tv_nombre1 = (TextView)vista.findViewById(R.id.tv_nombre1);
+        tv_nombre2 = (TextView)vista.findViewById(R.id.tv_nombre2);
+        tv_nombre3 = (TextView)vista.findViewById(R.id.tv_nombre3);
+
+        tv_nombre1.setText("Playa de Ses Illetes en Formentera");
+        tv_nombre2.setText("Playa de Bolonia en Tarifa");
+        tv_nombre3.setText("Playa de las Catedrales en Ribadeo");
+
+
+    }
+
+
+   /* public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        ViewGroup rootView = (ViewGroup) inflater.inflate(
+                R.layout.fragment_screen_slide_page, container, false);
+
+        return rootView;
+    }*/
+    private void cambioVistaUser() {
+        /*LayoutInflater inflador = LayoutInflater.from(this);
         View vista = inflador.inflate(R.layout.nav_header_main, null);
         tvNombreUser = vista.findViewById(R.id.tv_nombreUser);
-        tvEmail = vista.findViewById(R.id.tv_email_header);
+        tvEmail = vista.findViewById(R.id.tv_email_header);*/
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        tvNombreUser = (TextView) headerView.findViewById(R.id.tv_nombreUser);
+        tvEmail = (TextView)headerView.findViewById(R.id.tv_email_header);
+
     }
 
 
@@ -193,6 +208,9 @@ public class MainScreen extends AppCompatActivity
         if (id == R.id.nav_home) {
             // Handle the camera action
         } else if (id == R.id.nav_perfil) {
+            Intent intent = new Intent(c, PerfilUser.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
 
         } else if (id == R.id.nav_playas) {
 
