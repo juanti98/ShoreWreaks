@@ -3,6 +3,7 @@
     package="com.example.juan.shorewreaks">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -11,9 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity
-            android:name=".Playas"
-            android:label="@string/title_activity_playas"></activity>
+        <activity android:name=".PerfilUser"></activity>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

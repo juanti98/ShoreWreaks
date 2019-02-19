@@ -43,7 +43,8 @@ import java.io.PrintWriter;
 import java.util.concurrent.TimeUnit;
 
 public class SingUp extends AppCompatActivity {
-    private Button mCancelButton, mSingupButton;
+    private Button mCancelButton;
+    private Button mSingupButton;
     private ImageView singUpGoogle;
 
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -67,6 +68,7 @@ public class SingUp extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
         c = this;
 
         etUsername = findViewById(R.id.etUserName);
@@ -75,6 +77,7 @@ public class SingUp extends AppCompatActivity {
 
         mCancelButton = (Button)findViewById(R.id.btnCancel);
         mSingupButton = (Button)findViewById(R.id.btnSingUp);
+        SignInButton signInButton = findViewById(R.id.sign_in_button);
 
 
         //Sign Up with username, password and email
@@ -91,6 +94,7 @@ public class SingUp extends AppCompatActivity {
             }
         });
 
+
 //        cancel button
         mCancelButton.setOnClickListener(new View.OnClickListener() {
 
@@ -101,9 +105,6 @@ public class SingUp extends AppCompatActivity {
             }
         });
 
-        //if (AccessToken.getCurrentAccessToken() == null) {
-        //    goLoginScreen();
-        //}
     }
     private void createAccount(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -129,6 +130,7 @@ public class SingUp extends AppCompatActivity {
                     }
                 });
     }
+
 
  /*   public void logout(View view){
         LoginManager.getInstance().logOut();
