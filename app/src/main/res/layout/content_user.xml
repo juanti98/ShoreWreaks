@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".PerfilUser"
+    tools:showIn="@layout/app_bar_user"
+    android:background="@drawable/f31536531d4515021f43389ad4ae6e1d">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:layout_width="333dp"
+            android:layout_height="328dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:visibility="visible"
+            app:civ_border_color="@color/colorAccent"
+            app:civ_border_width="4dp"
+            app:civ_shadow="true"
+            app:civ_shadow_color="#F5F5F6"
+            app:civ_shadow_radius="10"
+            app:srcCompat="@drawable/com_facebook_profile_picture_blank_square" />
+
+        <TextView
+            android:id="@+id/tv_info_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="Nombre Usuario"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/tv_name_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:cursorVisible="false"
+            android:textColor="@color/background_purple"
+            android:textSize="14sp" />
+
+
+        <TextView
+            android:id="@+id/tv_info_mail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="Email"
+            android:textColor="@color/background_purple"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:id="@+id/tv_mail_user"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_margin="20dp"
+            android:layout_marginTop="10dp"
+            android:text="TextView"
+            android:textColor="@color/colorAccent" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

@@ -8,11 +8,15 @@
     android:id="@+id/drawer_layout_user"
     android:fitsSystemWindows="true">
 
+    <include
+        layout="@layout/app_bar_user"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
-        android:layout_width="279dp"
-        android:layout_height="727dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
@@ -20,7 +24,7 @@
         app:itemTextColor="#7F171B"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/activity_main_drawer" >
+        app:menu="@menu/activity_main_drawer">
 
     </android.support.design.widget.NavigationView>
 

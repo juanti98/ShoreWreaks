@@ -89,6 +89,8 @@ public class MainScreen extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //DialogFlow
+
         final AIConfiguration config = new AIConfiguration("499ca68207fa404a94eed99ecdd26d17",
                 AIConfiguration.SupportedLanguages.Spanish,
                 AIConfiguration.RecognitionEngine.System);
@@ -142,18 +144,8 @@ public class MainScreen extends AppCompatActivity
     }
 
 
-   /* public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.fragment_screen_slide_page, container, false);
-
-        return rootView;
-    }*/
     private void cambioVistaUser() {
-        /*LayoutInflater inflador = LayoutInflater.from(this);
-        View vista = inflador.inflate(R.layout.nav_header_main, null);
-        tvNombreUser = vista.findViewById(R.id.tv_nombreUser);
-        tvEmail = vista.findViewById(R.id.tv_email_header);*/
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
         tvNombreUser = (TextView) headerView.findViewById(R.id.tv_nombreUser);
