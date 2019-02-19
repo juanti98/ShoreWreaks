@@ -35,6 +35,8 @@ import android.widget.TextView;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.junit.experimental.categories.IncludeCategories;
 
@@ -66,19 +68,40 @@ public class MainScreen extends AppCompatActivity
 
         cambioVistaUser();
 
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("users");
+
+
 
         c = this;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
-            String name = user.getDisplayName();
+            String nombreCompleto, name = "", lastname ="";
+            int count = 0, count2;
+            nombreCompleto = user.getDisplayName();
+            while(count < nombreCompleto.length()){
+                if (!(nombreCompleto.substring(count, count + 1).equals(" "))){
+                    name += nombreCompleto.substring(count, count + 1);
+                } else if(nombreCompleto.substring(count, count + 1).equals(" ")){
+                    count2 = count;
+                    while(count2 < nombreCompleto.length()){
+                        lastname += nombreCompleto.substring(count2, count2 + 1);
+                        count2++;
+                    }
+                    count = nombreCompleto.length();
+                    lastname.trim();
+                }
+                count++;
+            }
             String email = user.getEmail();
             Uri photoUrl = user.getPhotoUrl();
             String uid = user.getUid();
 
+            Users users = new Users("juanti98",email,name,lastname);
+            myRef.setValue(users);
 
             tvNombreUser.setText(name);
-
             tvEmail.setText(email);
 
         } else {
