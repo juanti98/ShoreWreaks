@@ -5,7 +5,7 @@
     android:id="@+id/liner_user"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
-    android:background="@drawable/f31536531d4515021f43389ad4ae6e1d"
+    android:background="@drawable/cece111e3550694c19db413df7c2751"
     android:gravity="bottom"
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
