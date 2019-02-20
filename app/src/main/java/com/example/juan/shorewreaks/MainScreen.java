@@ -68,8 +68,6 @@ public class MainScreen extends AppCompatActivity
 
         cambioVistaUser();
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("users");
 
 
 
@@ -96,9 +94,6 @@ public class MainScreen extends AppCompatActivity
             String email = user.getEmail();
             Uri photoUrl = user.getPhotoUrl();
             String uid = user.getUid();
-
-            Users users = new Users("juanti98",email,name,lastname);
-            myRef.setValue(users);
 
             tvNombreUser.setText(name);
             tvEmail.setText(email);
