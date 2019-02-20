@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">ShoreWreck</string>
     <string name="title_activity_login">Sign in</string>
-    <string name="facebook_app_id">2259923267630702</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -24,19 +23,27 @@
     <string name="signup_text">have you got an account? Register</string>
     <string name="password_hint">password</string>
     <string name="email_hint">email</string>
-    <string name="signup_button_label">email</string>
+    <string name="signup_button_label">SignUp</string>
     <string name="cancel_button_label">Cancel</string>
     <string name="slogan">for the planet</string>
-    <string name="title_activity_navigation_drawer">NavigationDrawer</string>
+    <string name="title_activity_main_screen">MainScreen</string>
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_example">Example action</string>
 
     <string name="action_settings">Settings</string>
-</resources>
 
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="facebook_app_id">2259923267630702</string>
+    <string name="nav_menu_inicio">Inicio</string>
+    <string name="forgotPassword">Forgot your password?</string>
+</resources>
