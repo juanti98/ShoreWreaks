@@ -143,27 +143,8 @@ public class MainScreen extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        cargarRanking();
     }
 
-    private void cargarRanking() {
-        //  LayoutInflater inflater = (LayoutInflater)this.getSystemService (Context.LAYOUT_INFLATER_SERVICE);
-
-        LayoutInflater inflador = LayoutInflater.from(this);
-        View vista = inflador.inflate(R.layout.activity_ranking, null);
-
-        tv_titulo = (TextView)vista.findViewById(R.id.tv_titulo);
-        img_copa = vista.findViewById(R.id.img_copa);
-        tv_nombre1 = (TextView)vista.findViewById(R.id.tv_nombre1);
-        tv_nombre2 = (TextView)vista.findViewById(R.id.tv_nombre2);
-        tv_nombre3 = (TextView)vista.findViewById(R.id.tv_nombre3);
-
-        tv_nombre1.setText("Playa de Ses Illetes en Formentera");
-        tv_nombre2.setText("Playa de Bolonia en Tarifa");
-        tv_nombre3.setText("Playa de las Catedrales en Ribadeo");
-
-
-    }
 
 
     private void cambioVistaUser() {
