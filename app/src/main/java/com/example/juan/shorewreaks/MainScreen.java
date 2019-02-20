@@ -84,13 +84,12 @@ public class MainScreen extends AppCompatActivity
                 if (!(nombreCompleto.substring(count, count + 1).equals(" "))){
                     name += nombreCompleto.substring(count, count + 1);
                 } else if(nombreCompleto.substring(count, count + 1).equals(" ")){
-                    count2 = count;
+                    count2 = count + 1;
                     while(count2 < nombreCompleto.length()){
                         lastname += nombreCompleto.substring(count2, count2 + 1);
                         count2++;
                     }
                     count = nombreCompleto.length();
-                    lastname.trim();
                 }
                 count++;
             }
