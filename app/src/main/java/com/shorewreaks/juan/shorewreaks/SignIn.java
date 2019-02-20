@@ -1,4 +1,4 @@
-package com.example.juan.shorewreaks;
+package com.shorewreaks.juan.shorewreaks;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;

@@ -1,4 +1,4 @@
-package com.example.juan.shorewreaks;
+package com.shorewreaks.juan.shorewreaks;
 
 public class RankingPlayas {
 

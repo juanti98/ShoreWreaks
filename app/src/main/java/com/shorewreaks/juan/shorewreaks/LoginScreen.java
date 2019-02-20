@@ -1,4 +1,4 @@
-package com.example.juan.shorewreaks;
+package com.shorewreaks.juan.shorewreaks;
 
 import android.content.Context;
 import android.content.Intent;
@@ -34,7 +34,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
@@ -79,7 +78,7 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
 
         GoogleSignInOptions gso = new GoogleSignInOptions
                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("45561172240-20h1qogc0tkdjegb3usq3e80n6r39suo.apps.googleusercontent.com")
+                .requestIdToken("45561172240-9e6chk7pt2v4784ptovvktu3dganvflv.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
         mGoogleApliClient = new GoogleApiClient.Builder(this)

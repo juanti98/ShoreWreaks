@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.juan.shorewreaks">
+    package="com.shorewreaks.juan.shorewreaks">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -12,19 +12,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".PerfilUser"></activity>
+        <activity android:name="com.shorewreaks.juan.shorewreaks.PerfilUser"></activity>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name=".MainScreen"
+            android:name="com.shorewreaks.juan.shorewreaks.MainScreen"
             android:label="@string/title_activity_main_screen"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SplashScreen"
+            android:name="com.shorewreaks.juan.shorewreaks.SplashScreen"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,10 +33,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SingUp"
+            android:name="com.shorewreaks.juan.shorewreaks.SingUp"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LoginScreen"
+            android:name="com.shorewreaks.juan.shorewreaks.LoginScreen"
             android:screenOrientation="portrait" />
     </application>
 

@@ -1,33 +1,20 @@
-package com.example.juan.shorewreaks;
+package com.shorewreaks.juan.shorewreaks;
 
-import android.app.Activity;
-
-import android.app.ActionBar;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.support.design.snackbar.ContentViewCallback;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Layout;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Button;
@@ -37,8 +24,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.junit.experimental.categories.IncludeCategories;
 
 import ai.api.AIListener;
 import ai.api.android.AIConfiguration;
@@ -68,8 +53,7 @@ public class MainScreen extends AppCompatActivity
 
         cambioVistaUser();
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("users");
+
 
 
 
@@ -80,6 +64,7 @@ public class MainScreen extends AppCompatActivity
             String nombreCompleto, name = "", lastname ="";
             int count = 0, count2;
             nombreCompleto = user.getDisplayName();
+            /*
             while(count < nombreCompleto.length()){
                 if (!(nombreCompleto.substring(count, count + 1).equals(" "))){
                     name += nombreCompleto.substring(count, count + 1);
@@ -93,12 +78,12 @@ public class MainScreen extends AppCompatActivity
                 }
                 count++;
             }
+            */
             String email = user.getEmail();
             Uri photoUrl = user.getPhotoUrl();
             String uid = user.getUid();
 
-            Users users = new Users("juanti98",email,name,lastname);
-            myRef.setValue(users);
+
 
             tvNombreUser.setText(name);
             tvEmail.setText(email);

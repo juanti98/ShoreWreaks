@@ -48,7 +48,59 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "45561172240-f395ph965lk8u6pj77stqf6dgboqvtq4.apps.googleusercontent.com",
+              "client_id": "45561172240-20h1qogc0tkdjegb3usq3e80n6r39suo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:45561172240:android:dc980dad1b69c1b9",
+        "android_client_info": {
+          "package_name": "com.shorewreaks.juan.shorewreaks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "45561172240-a57p9cfvjt30psmidrm0g6h4tbq1qn27.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shorewreaks.juan.shorewreaks",
+            "certificate_hash": "204b6774110b8191ea2ff961e1d87403d1b6da48"
+          }
+        },
+        {
+          "client_id": "45561172240-s4hp9kk6vvcnj5h36ab3cprq7h1cs8lc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shorewreaks.juan.shorewreaks",
+            "certificate_hash": "c80354a28a4c406bdda58adaca76a7c763481ef3"
+          }
+        },
+        {
+          "client_id": "45561172240-f395ph965lk8u6pj77stqf6dgboqvtq4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDE5qtCtdQJPTuGUE-LVv5INbu-0cqOS44"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "45561172240-20h1qogc0tkdjegb3usq3e80n6r39suo.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
