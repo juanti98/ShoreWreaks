@@ -78,7 +78,7 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
 
         GoogleSignInOptions gso = new GoogleSignInOptions
                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("45561172240-9e6chk7pt2v4784ptovvktu3dganvflv.apps.googleusercontent.com")
+                .requestIdToken("45561172240-20h1qogc0tkdjegb3usq3e80n6r39suo.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
         mGoogleApliClient = new GoogleApiClient.Builder(this)
