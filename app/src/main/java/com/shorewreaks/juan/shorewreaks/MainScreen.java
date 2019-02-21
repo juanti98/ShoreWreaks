@@ -209,6 +209,7 @@ public class MainScreen extends AppCompatActivity
 
         }
         else if (id == R.id.logOut) {
+            FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(c, LoginScreen.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
@@ -220,7 +221,7 @@ public class MainScreen extends AppCompatActivity
     }
 
         private void goLoginScreen() {
-            FirebaseAuth.getInstance().signOut();
+           // FirebaseAuth.getInstance().signOut();
             LoginManager.getInstance().logOut();
             Intent intent = new Intent(this, MainScreen.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

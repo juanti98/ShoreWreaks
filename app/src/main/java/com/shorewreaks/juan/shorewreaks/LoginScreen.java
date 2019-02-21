@@ -85,7 +85,7 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
                 .enableAutoManage(this, (GoogleApiClient.OnConnectionFailedListener) this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
-        
+
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
