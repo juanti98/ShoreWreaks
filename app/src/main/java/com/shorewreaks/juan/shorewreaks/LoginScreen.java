@@ -113,6 +113,7 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
             @Override
             public void onSuccess(LoginResult loginResult) {
                 handleFacebookAccessToken(loginResult.getAccessToken());
+                goMainScreen();
 
             }
 
@@ -163,7 +164,7 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
     }
     private void handleFacebookAccessToken(@NonNull AccessToken accessToken) {
         loginButton.setVisibility(View.GONE);
-        progressBar.setVisibility(View.VISIBLE);
+//        progressBar.setVisibility(View.VISIBLE);
         AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
