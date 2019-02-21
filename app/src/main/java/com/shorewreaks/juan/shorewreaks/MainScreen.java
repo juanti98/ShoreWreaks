@@ -1,12 +1,16 @@
 package com.shorewreaks.juan.shorewreaks;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -33,6 +37,8 @@ import ai.api.model.AIResponse;
 import ai.api.model.Result;
 import androidx.annotation.RequiresApi;
 
+import static android.Manifest.permission.RECORD_AUDIO;
+
 public class MainScreen extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, AIListener {
     private ListView lv_ranking;
@@ -53,9 +59,7 @@ public class MainScreen extends AppCompatActivity
 
         cambioVistaUser();
 
-
-
-
+        ActivityCompat.requestPermissions(this, new String[]{RECORD_AUDIO},0);
 
         c = this;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -64,7 +68,7 @@ public class MainScreen extends AppCompatActivity
             String nombreCompleto, name = "", lastname ="";
             int count = 0, count2;
             nombreCompleto = user.getDisplayName();
-            /*
+
             while(count < nombreCompleto.length()){
                 if (!(nombreCompleto.substring(count, count + 1).equals(" "))){
                     name += nombreCompleto.substring(count, count + 1);
@@ -78,7 +82,7 @@ public class MainScreen extends AppCompatActivity
                 }
                 count++;
             }
-            */
+
             String email = user.getEmail();
             Uri photoUrl = user.getPhotoUrl();
             String uid = user.getUid();

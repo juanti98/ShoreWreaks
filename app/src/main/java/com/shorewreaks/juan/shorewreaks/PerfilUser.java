@@ -66,9 +66,6 @@ public class PerfilUser extends AppCompatActivity implements NavigationView.OnNa
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-
-
     }
 
     private void cargarDatos() {
@@ -113,8 +110,8 @@ public class PerfilUser extends AppCompatActivity implements NavigationView.OnNa
             startActivity(intent);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+      //  DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+      //  drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
