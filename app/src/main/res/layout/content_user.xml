@@ -118,6 +118,19 @@
                 android:text="__"
                 android:textColor="@color/colorAccent"
                 android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/btnGuardar"
+                style="@style/AuthButton"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:background="@color/colorPrimaryDark"
+                android:elevation="14dp"
+                android:text="Guardar"
+                android:textColor="@color/apptheme_color"
+                android:textSize="15sp" />
         </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
