@@ -55,7 +55,7 @@
 
                 <EditText
                     android:id="@+id/et_name_user"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="0dp"
@@ -75,7 +75,7 @@
 
                 <EditText
                     android:id="@+id/et_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="0dp"
@@ -95,7 +95,7 @@
 
                 <EditText
                     android:id="@+id/et_last_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="0dp"
@@ -116,8 +116,8 @@
 
                 <TextView
                     android:id="@+id/tv_mail_user"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:layout_marginTop="0dp"
                     android:text="__"
