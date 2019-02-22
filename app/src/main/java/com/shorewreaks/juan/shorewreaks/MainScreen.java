@@ -23,11 +23,15 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Locale;
 
 import ai.api.AIListener;
 import ai.api.android.AIConfiguration;
@@ -50,6 +54,7 @@ public class MainScreen extends AppCompatActivity
 
     private AIService mAIService;
     private TextToSpeech mTextToSpeech;
+    int result;
 
 
     @Override
@@ -108,7 +113,7 @@ public class MainScreen extends AppCompatActivity
 
         mAIService = AIService.getService(this, config);
         mAIService.setListener(this);
-        mTextToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+        mTextToSpeech = new TextToSpeech(MainScreen.this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
 
