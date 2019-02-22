@@ -19,6 +19,8 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SingUp extends AppCompatActivity {
     private Button mCancelButton;
@@ -33,12 +35,13 @@ public class SingUp extends AppCompatActivity {
     private static final String TAG = "GoogleActivity";
 
 
-    private EditText etUsername, etEmail, etPassword;
+    private EditText etUsername, etEmail, etPassword, etNombre, etApellido;
     private GoogleSignInClient mGoogleSignInClient;
     private GoogleApiClient mGoogleApliClient;
     private FirebaseAuth mAuth;
     private Context c;
 
+    private DatabaseReference mDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,8 @@ public class SingUp extends AppCompatActivity {
         c = this;
 
         etUsername = findViewById(R.id.etUserName);
+        etNombre = findViewById(R.id.etNombre);
+        etApellido = findViewById(R.id.etApellido);
         etPassword = findViewById(R.id.etPassword);
         etEmail = findViewById(R.id.etEmail);
 
@@ -57,18 +62,24 @@ public class SingUp extends AppCompatActivity {
         mSingupButton = (Button)findViewById(R.id.btnSingUp);
         SignInButton signInButton = findViewById(R.id.sign_in_button);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+
+
 
         //Sign Up with username, password and email
         mSingupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username, password, email;
+                String username, password, email, name, lastname;
 
                 username = etUsername.getText().toString();
+                name = etNombre.getText().toString();
+                lastname = etApellido.getText().toString();
                 password = etPassword.getText().toString();
                 email = etEmail.getText().toString();
 
-                createAccount(email, password);
+                createAccount(email, password, name, lastname, username);
             }
         });
 
@@ -84,7 +95,7 @@ public class SingUp extends AppCompatActivity {
         });
 
     }
-    private void createAccount(String email, String password) {
+    private void createAccount(final String email, String password, final String name, final String lastname, final String username) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -97,6 +108,8 @@ public class SingUp extends AppCompatActivity {
                             etEmail.setText("");
                             Toast.makeText(c, "Usuario Creado",
                                     Toast.LENGTH_SHORT).show();
+                            Users nuevoUser = new Users(username,email,name,lastname);
+                            mDatabase.child("users").child(user.getUid()).setValue(nuevoUser);
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.

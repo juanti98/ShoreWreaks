@@ -40,6 +40,31 @@
             <requestFocus />
         </EditText>
 
+        <EditText
+            android:id="@+id/etNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@+id/subtitle"
+            android:layout_alignParentLeft="true"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:textColorHint="@color/focused_purple_button"
+            android:textColorLink="@android:color/holo_blue_bright"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/etApellido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@+id/subtitle"
+            android:layout_alignParentLeft="true"
+            android:hint="Last Name"
+            android:inputType="textPersonName"
+            android:textColorHint="@color/focused_purple_button"
+            android:textColorLink="@android:color/holo_blue_bright"
+            android:textSize="17sp" />
 
         <EditText
             android:id="@+id/etPassword"

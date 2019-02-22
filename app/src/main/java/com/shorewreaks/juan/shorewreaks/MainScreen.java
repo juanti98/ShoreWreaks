@@ -46,7 +46,6 @@ public class MainScreen extends AppCompatActivity
     private Context c;
     private TextView tv_nombre1,tv_nombre2,tv_nombre3,tv_titulo;
     private ImageView img_copa;
-    private TextView tvNombreUser, tvEmail;
 
     private AIService mAIService;
     private TextToSpeech mTextToSpeech;
@@ -65,32 +64,6 @@ public class MainScreen extends AppCompatActivity
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
-            String nombreCompleto, name = "", lastname ="";
-            int count = 0, count2;
-            nombreCompleto = user.getDisplayName();
-
-            while(count < nombreCompleto.length()){
-                if (!(nombreCompleto.substring(count, count + 1).equals(" "))){
-                    name += nombreCompleto.substring(count, count + 1);
-                } else if(nombreCompleto.substring(count, count + 1).equals(" ")){
-                    count2 = count + 1;
-                    while(count2 < nombreCompleto.length()){
-                        lastname += nombreCompleto.substring(count2, count2 + 1);
-                        count2++;
-                    }
-                    count = nombreCompleto.length();
-                }
-                count++;
-            }
-
-            String email = user.getEmail();
-            Uri photoUrl = user.getPhotoUrl();
-            String uid = user.getUid();
-
-
-
-            tvNombreUser.setText(name);
-            tvEmail.setText(email);
 
         } else {
             goLoginScreen();
@@ -140,8 +113,7 @@ public class MainScreen extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
-        tvNombreUser = (TextView) headerView.findViewById(R.id.tv_nombreUser);
-        tvEmail = (TextView)headerView.findViewById(R.id.tv_email_header);
+
 
     }
 

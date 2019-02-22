@@ -2,15 +2,13 @@ package com.shorewreaks.juan.shorewreaks;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +19,6 @@ import android.widget.TextView;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +33,8 @@ public class PerfilUser extends AppCompatActivity implements NavigationView.OnNa
     private ImageView img_user;
     private TextView tvNombreUser, tvEmail;
     private DatabaseReference mDatabase;
+    private String userID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,34 +42,22 @@ public class PerfilUser extends AppCompatActivity implements NavigationView.OnNa
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        String username = "juanti98";
-        Users nuevoUser = new Users(username,"juanti98@gmail.com","Juan","Torres");
-        mDatabase.child("users").child(username).setValue(nuevoUser);
-
         cambioVistaUser();
         cargarDatos();
 
         c = this;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
         if (user != null) {
-            //String name = user.getDisplayName();
-            String email = user.getEmail();
-            //Uri photoUrl = user.getPhotoUrl();
-            String uid = user.getUid();
-            //setNombreApellido(name);
-            //tvNombreUser.setText(name);
-            //et_name_user.setText(name);
-            tvEmail.setText(email);
-            //tv_mail_user.setText(email);
+            userID = user.getUid();
 
-            mDatabase.child("users").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
+            mDatabase.child("users").child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     et_name_user.setText(dataSnapshot.child("username").getValue().toString());
                     et_nombre.setText(dataSnapshot.child("name").getValue().toString());
                     et_apellido.setText(dataSnapshot.child("lastname").getValue().toString());
                     tv_mail_user.setText(dataSnapshot.child("email").getValue().toString());
+
                 }
 
                 @Override
@@ -94,8 +81,6 @@ public class PerfilUser extends AppCompatActivity implements NavigationView.OnNa
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
 
 
     }
@@ -135,7 +120,7 @@ public class PerfilUser extends AppCompatActivity implements NavigationView.OnNa
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
         tvNombreUser = (TextView) headerView.findViewById(R.id.tv_nombreUser);
-        tvEmail = (TextView)headerView.findViewById(R.id.tv_email_header);
+        tvEmail = (TextView) headerView.findViewById(R.id.tv_email_header);
 
     }
 
@@ -145,11 +130,11 @@ public class PerfilUser extends AppCompatActivity implements NavigationView.OnNa
 
         if (id == R.id.nav_home) {
             Intent intent = new Intent(c, MainScreen.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         } else if (id == R.id.nav_perfil) {
             Intent intent = new Intent(c, PerfilUser.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
 
         } else if (id == R.id.nav_playas) {
@@ -160,15 +145,14 @@ public class PerfilUser extends AppCompatActivity implements NavigationView.OnNa
 
         } else if (id == R.id.nav_send) {
 
-        }
-        else if (id == R.id.logOut) {
+        } else if (id == R.id.logOut) {
             Intent intent = new Intent(c, LoginScreen.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
 
-      //  DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-      //  drawer.closeDrawer(GravityCompat.START);
+        //  DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //  drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
