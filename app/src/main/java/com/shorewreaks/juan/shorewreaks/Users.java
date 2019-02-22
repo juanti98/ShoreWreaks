@@ -1,5 +1,8 @@
 package com.shorewreaks.juan.shorewreaks;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Users {
     private String username, email, name, lastname;
 
@@ -40,5 +43,15 @@ public class Users {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("username",username);
+        result.put("name",name);
+        result.put("lastname",lastname);
+        result.put("email",email);
+
+        return result;
     }
 }
