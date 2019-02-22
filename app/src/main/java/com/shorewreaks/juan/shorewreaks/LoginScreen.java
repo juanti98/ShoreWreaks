@@ -59,7 +59,6 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
     private GoogleApiClient mGoogleApliClient;
     private FirebaseAnalytics mFirebaseAnalytics;
 
-    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +116,7 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
             @Override
             public void onSuccess(LoginResult loginResult) {
                 handleFacebookAccessToken(loginResult.getAccessToken());
-
+                FirebaseUser user = mAuth.getCurrentUser();
                 goMainScreen();
 
             }
@@ -178,6 +177,7 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
                     Toast.makeText(getApplicationContext(), "Fail", Toast.LENGTH_LONG).show();
 
                 }else{
+                    firebaseAuth.getUid();
                     goMainScreen();
                     //  progressBar.setVisibility(View.GONE);
                     loginButton.setVisibility(View.VISIBLE);
@@ -273,8 +273,6 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
                         if (task.isSuccessful()){
                             Log.d(TAG,"signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Users nuevoUser = new Users("","","","");
-                            mDatabase.child("users").child(user.getUid()).setValue(nuevoUser);
                             goLoginScreen();
                         }
                         else {

@@ -47,24 +47,32 @@ public class PerfilUser extends AppCompatActivity implements NavigationView.OnNa
 
         c = this;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final String email = user.getEmail();
         if (user != null) {
             userID = user.getUid();
+                mDatabase.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.hasChild(userID)){
+                            et_name_user.setText(dataSnapshot.child(userID).child("username").getValue().toString());
+                            et_nombre.setText(dataSnapshot.child(userID).child("name").getValue().toString());
+                            et_apellido.setText(dataSnapshot.child(userID).child("lastname").getValue().toString());
+                            tv_mail_user.setText(dataSnapshot.child(userID).child("email").getValue().toString());
+                        } else {
+                            et_name_user.setText("");
+                            et_nombre.setText("");
+                            et_apellido.setText("");
+                            tv_mail_user.setText(email);
+                        }
+                    }
 
-            mDatabase.child("users").child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    et_name_user.setText(dataSnapshot.child("username").getValue().toString());
-                    et_nombre.setText(dataSnapshot.child("name").getValue().toString());
-                    et_apellido.setText(dataSnapshot.child("lastname").getValue().toString());
-                    tv_mail_user.setText(dataSnapshot.child("email").getValue().toString());
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                }
+                    }
+                });
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                }
-            });
 
         } else {
             goLoginScreen();
