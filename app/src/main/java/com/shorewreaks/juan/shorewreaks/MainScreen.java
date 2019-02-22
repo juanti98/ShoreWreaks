@@ -66,7 +66,7 @@ public class MainScreen extends AppCompatActivity
 
         if (user != null) {
             Users nuevoUser = new Users("",user.getEmail(),"","");
-            mDatabase.child("users").child(user.getUid()).setValue(nuevoUser);
+
         } else {
             goLoginScreen();
         }
@@ -180,6 +180,9 @@ public class MainScreen extends AppCompatActivity
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
+            Intent intent = new Intent(c, ChatUsers.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
 
         }
         else if (id == R.id.logOut) {
