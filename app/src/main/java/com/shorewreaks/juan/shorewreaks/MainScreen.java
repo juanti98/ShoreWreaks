@@ -49,6 +49,7 @@ public class MainScreen extends AppCompatActivity
 
     private AIService mAIService;
     private TextToSpeech mTextToSpeech;
+    private DatabaseReference mDatabase;
 
 
     @Override
@@ -64,7 +65,8 @@ public class MainScreen extends AppCompatActivity
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
-
+            Users nuevoUser = new Users("",user.getEmail(),"","");
+            mDatabase.child("users").child(user.getUid()).setValue(nuevoUser);
         } else {
             goLoginScreen();
         }

@@ -114,6 +114,7 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
             @Override
             public void onSuccess(LoginResult loginResult) {
                 handleFacebookAccessToken(loginResult.getAccessToken());
+
                 goMainScreen();
 
             }
