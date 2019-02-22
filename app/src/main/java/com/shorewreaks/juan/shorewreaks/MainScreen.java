@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -26,8 +27,11 @@ import android.widget.TextView;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import ai.api.AIListener;
 import ai.api.android.AIConfiguration;
@@ -49,7 +53,6 @@ public class MainScreen extends AppCompatActivity
 
     private AIService mAIService;
     private TextToSpeech mTextToSpeech;
-    private DatabaseReference mDatabase;
 
 
     @Override
@@ -65,8 +68,6 @@ public class MainScreen extends AppCompatActivity
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
-            Users nuevoUser = new Users("",user.getEmail(),"","");
-
         } else {
             goLoginScreen();
         }
@@ -180,9 +181,6 @@ public class MainScreen extends AppCompatActivity
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
-            Intent intent = new Intent(c, ChatUsers.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
 
         }
         else if (id == R.id.logOut) {

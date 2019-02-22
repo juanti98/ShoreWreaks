@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +26,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PerfilUser extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Context c;
@@ -33,7 +37,7 @@ public class PerfilUser extends AppCompatActivity implements NavigationView.OnNa
     private ImageView img_user;
     private TextView tvNombreUser, tvEmail;
     private DatabaseReference mDatabase;
-    private String userID;
+    private Button btnGuardar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,24 +51,36 @@ public class PerfilUser extends AppCompatActivity implements NavigationView.OnNa
 
         c = this;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final String email = user.getEmail();
         if (user != null) {
-            userID = user.getUid();
+            final String userID = user.getUid();
+                mDatabase.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.hasChild(userID)){
+                            et_name_user.setText(dataSnapshot.child(userID).child("username").getValue().toString());
+                            et_nombre.setText(dataSnapshot.child(userID).child("name").getValue().toString());
+                            et_apellido.setText(dataSnapshot.child(userID).child("lastname").getValue().toString());
+                            tv_mail_user.setText(dataSnapshot.child(userID).child("email").getValue().toString());
+                        } else {
+                            et_name_user.setText("");
+                            et_nombre.setText("");
+                            et_apellido.setText("");
+                            tv_mail_user.setText(email);
+                            if (tv_mail_user.getText().toString().isEmpty()){
+                                tv_mail_user.setText("N/A");
+                            }
 
-            mDatabase.child("users").child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    et_name_user.setText(dataSnapshot.child("username").getValue().toString());
-                    et_nombre.setText(dataSnapshot.child("name").getValue().toString());
-                    et_apellido.setText(dataSnapshot.child("lastname").getValue().toString());
-                    tv_mail_user.setText(dataSnapshot.child("email").getValue().toString());
+                        }
+                    }
 
-                }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
 
-                }
-            });
+
 
         } else {
             goLoginScreen();
@@ -82,7 +98,56 @@ public class PerfilUser extends AppCompatActivity implements NavigationView.OnNa
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        btnGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateDatos();
+            }
+        });
 
+    }
+
+    private void updateDatos() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String email2 = tv_mail_user.getText().toString();
+        if (email2.isEmpty()){
+            email2 = "N/A";
+        }
+        final String email = email2, username = et_name_user.getText().toString(), name = et_nombre.getText().toString(), lastname = et_apellido.getText().toString();
+
+        if (user != null) {
+            final String userID = user.getUid();
+            mDatabase.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.hasChild(userID)){
+
+                        Users userUpdated = new Users(username,email,name,lastname);
+                        Map<String, Object> update = userUpdated.toMap();
+                        mDatabase.child("users").child(userID).updateChildren(update);
+                        Intent intent = new Intent(c, MainScreen.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    } else {
+                        Users nuevoUser = new Users(username,email,name,lastname);
+                        mDatabase.child("users").child(userID).setValue(nuevoUser);
+                        Intent intent = new Intent(c, MainScreen.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+
+
+        } else {
+            goLoginScreen();
+        }
     }
 
     private void setNombreApellido(String name) {
@@ -113,6 +178,7 @@ public class PerfilUser extends AppCompatActivity implements NavigationView.OnNa
         tv_mail_user = findViewById(R.id.tv_mail_user);
         et_nombre = findViewById(R.id.et_name);
         et_apellido = findViewById(R.id.et_last_name);
+        btnGuardar = findViewById(R.id.btnGuardar);
     }
 
     private void cambioVistaUser() {
