@@ -16,9 +16,9 @@
         android:orientation="vertical">
 
         <com.mikhaellopez.circularimageview.CircularImageView
-            android:layout_width="333dp"
-            android:layout_height="328dp"
-            android:layout_marginLeft="15dp"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginLeft="75dp"
             android:layout_marginTop="20dp"
             android:visibility="visible"
             app:civ_border_color="@color/colorAccent"
@@ -28,45 +28,96 @@
             app:civ_shadow_radius="10"
             app:srcCompat="@drawable/com_facebook_profile_picture_blank_square" />
 
-        <TextView
-            android:id="@+id/tv_info_name"
+        <LinearLayout
+            android:id="@+id/keysLayout"
+            style="@style/AuthFieldContainer"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:text="Nombre Usuario"
-            android:textColor="@color/colorAccent"
-            android:textSize="18sp" />
+            android:layout_below="@id/imageView"
+            android:layout_marginTop="33dp"
+            android:alpha="0.9">
 
-        <EditText
-            android:id="@+id/tv_name_user"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:cursorVisible="false"
-            android:textColor="@color/background_purple"
-            android:textSize="14sp" />
+            <TextView
+                android:id="@+id/tv_info_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:text="Nombre Usuario"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/et_name_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:cursorVisible="false"
+                android:textColor="@color/background_purple"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/tv_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:text="Nombre"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:cursorVisible="false"
+                android:textColor="@color/background_purple"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/tv_apellido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:text="Apellido"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/et_last_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:cursorVisible="false"
+                android:textColor="@color/background_purple"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/tv_info_mail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:text="Email"
+                android:textColor="@color/background_purple"
+                android:textSize="18sp" />
 
 
-        <TextView
-            android:id="@+id/tv_info_mail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:text="Email"
-            android:textColor="@color/background_purple"
-            android:textSize="18sp" />
-
-
-        <TextView
-            android:id="@+id/tv_mail_user"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_margin="20dp"
-            android:layout_marginTop="10dp"
-            android:text="TextView"
-            android:textColor="@color/colorAccent" />
+            <TextView
+                android:id="@+id/tv_mail_user"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_margin="20dp"
+                android:layout_marginTop="0dp"
+                android:text="__"
+                android:textColor="@color/colorAccent"
+                android:textSize="24sp" />
+        </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
