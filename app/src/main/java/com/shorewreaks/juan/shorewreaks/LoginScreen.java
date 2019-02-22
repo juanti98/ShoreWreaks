@@ -39,6 +39,7 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
 
 public class LoginScreen extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
     private LoginButton loginButton;
@@ -58,6 +59,7 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
     private GoogleApiClient mGoogleApliClient;
     private FirebaseAnalytics mFirebaseAnalytics;
 
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +100,7 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
                 // Intent intent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApliClient);
                 Intent intent = mGoogleSignInClient.getSignInIntent();
                 startActivityForResult(intent, RC_SIGN_IN);
+
             }
         });
 
@@ -159,7 +162,7 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    //goMainScreen();
+
                 }
             }
         };
@@ -270,6 +273,8 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
                         if (task.isSuccessful()){
                             Log.d(TAG,"signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            Users nuevoUser = new Users("","","","");
+                            mDatabase.child("users").child(user.getUid()).setValue(nuevoUser);
                             goLoginScreen();
                         }
                         else {
