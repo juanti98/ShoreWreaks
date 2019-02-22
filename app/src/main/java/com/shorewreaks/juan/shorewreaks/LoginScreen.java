@@ -175,7 +175,7 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
 
                 }else{
                     goMainScreen();
-                    progressBar.setVisibility(View.GONE);
+                    //  progressBar.setVisibility(View.GONE);
                     loginButton.setVisibility(View.VISIBLE);
                 }
 
