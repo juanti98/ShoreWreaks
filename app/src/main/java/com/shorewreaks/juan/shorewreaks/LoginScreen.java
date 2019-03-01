@@ -226,6 +226,7 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
         Intent intent = new Intent(this, MainScreen.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
     }
 
 
@@ -282,10 +283,12 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.On
                     }
                 });
     }
+
     private void goLoginScreen() {
         Intent intent = new Intent(this, MainScreen.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
     }
 
 }

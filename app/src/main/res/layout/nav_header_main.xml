@@ -17,7 +17,7 @@
     <com.mikhaellopez.circularimageview.CircularImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/starfish"
+        android:src="@drawable/water"
         app:civ_border_color="#F5F5F6"
         app:civ_border_width="4dp"
         app:civ_shadow="true"

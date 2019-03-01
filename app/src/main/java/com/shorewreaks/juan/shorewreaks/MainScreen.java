@@ -53,6 +53,8 @@ public class MainScreen extends AppCompatActivity
 
     private AIService mAIService;
     private TextToSpeech mTextToSpeech;
+    private FirebaseUser currentUser;
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -121,11 +123,6 @@ public class MainScreen extends AppCompatActivity
     }
 
 
-    /*private void cargarDatos() {
-
-        Adaptador adaptador = new Adaptador(this, lista_rankings);
-    }
-*/
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -151,7 +148,7 @@ public class MainScreen extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_about) {
             return true;
         }
 
@@ -181,13 +178,16 @@ public class MainScreen extends AppCompatActivity
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
+            Intent intent = new Intent(c, ChatUsers.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
 
         }
         else if (id == R.id.logOut) {
-            FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(c, LoginScreen.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+            mAuth.getInstance().signOut();
+            Intent intentOut = new Intent(this, LoginScreen.class);
+            intentOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentOut);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -196,7 +196,7 @@ public class MainScreen extends AppCompatActivity
     }
 
         private void goLoginScreen() {
-           // FirebaseAuth.getInstance().signOut();
+            FirebaseAuth.getInstance().signOut();
             LoginManager.getInstance().logOut();
             Intent intent = new Intent(this, MainScreen.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -238,4 +238,5 @@ public class MainScreen extends AppCompatActivity
     public void onListeningFinished() {
 
     }
+
 }
