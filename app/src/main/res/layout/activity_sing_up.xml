@@ -26,11 +26,11 @@
         android:alpha="0.9">
 
         <EditText
-            android:id="@+id/usernamefield"
+            android:id="@+id/etUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_below="@+id/subtitle"
+            android:layout_alignParentLeft="true"
             android:hint="Username"
             android:textColorHint="#6400838f"
             android:textColorLink="@android:color/background_dark"
@@ -42,12 +42,12 @@
 
 
         <EditText
-            android:id="@+id/passwordfield"
+            android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:layout_alignParentLeft="true"
             android:layout_below="@+id/subtitle"
+            android:layout_alignParentLeft="true"
             android:hint="Password"
             android:inputType="textPassword"
             android:textColorHint="@color/focused_purple_button"
@@ -55,42 +55,46 @@
             android:textSize="17sp" />
 
         <EditText
-            android:id="@+id/emailfield"
+            android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_below="@+id/subtitle"
+            android:layout_alignParentLeft="true"
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:textColorHint="@color/focused_purple_button"
             android:textColorLink="@color/background_purple"
             android:textSize="17sp" />
 
+        <Button
+            android:id="@+id/btnSingUp"
+            style="@style/AuthButton"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorPrimaryDark"
+            android:elevation="14dp"
+            android:text="@string/signup_button_label"
+            android:textColor="@color/apptheme_color"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            style="@style/AuthButton"
+
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/cancel_button_label"
+            android:textColor="@color/apptheme_color"
+            android:textSize="15sp" />
+
+
+        <!---->
+
     </LinearLayout>
 
-    <Button
-        android:id="@+id/signupbutton"
-        style="@style/AuthButton"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="165dp"
-        android:background="@color/colorPrimaryDark"
-        android:elevation="14dp"
-        android:text="@string/signup_button_label"
-        android:textColor="@color/apptheme_color"
-        android:textSize="15sp" />
-
-    <Button
-        android:id="@+id/cancelbutton"
-        style="@style/AuthButton"
-
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="94dp"
-        android:background="@color/colorPrimaryDark"
-        android:text="@string/cancel_button_label"
-        android:textColor="@color/apptheme_color"
-        android:textSize="15sp" />
 </RelativeLayout>
