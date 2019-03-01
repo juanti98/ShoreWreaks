@@ -1,12 +1,14 @@
 package com.shorewreaks.juan.shorewreaks;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -29,7 +31,7 @@ public class GroupsFragment extends Fragment {
 
 
     private View groupFragmentView;
-    private ListView listView;
+    private ListView lv_groups;
     private ArrayAdapter<String> arrayAdapter;
     private ArrayList<String> list_groups = new ArrayList<>();
 
@@ -54,6 +56,17 @@ public class GroupsFragment extends Fragment {
 
         RetrieveAndDisplayGroups();
 
+        lv_groups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id)
+            {
+                String currentGroupName = adapterView.getItemAtPosition(position).toString();
+
+                Intent groupChatIntent = new Intent(getContext(), GroupChatActivity.class);
+                groupChatIntent.putExtra("groupName", currentGroupName);
+                startActivity(groupChatIntent);
+            }
+        });
         return groupFragmentView;
 
     }
@@ -61,9 +74,9 @@ public class GroupsFragment extends Fragment {
 
     private void IniciarVistas()
     {
-        listView = (ListView)groupFragmentView.findViewById(R.id.lv_groups);
+        lv_groups = (ListView)groupFragmentView.findViewById(R.id.lv_groups);
         arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, list_groups);
-        listView.setAdapter(arrayAdapter);
+        lv_groups.setAdapter(arrayAdapter);
     }
 
     private void RetrieveAndDisplayGroups()
