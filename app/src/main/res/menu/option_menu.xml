@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="Encontrar Contacto"
+        android:id="@+id/chat_find_contact"
+        app:showAsAction="never"
+        >
+
+    </item>
+    <item
+        android:title="Create Group"
+        android:id="@+id/chat_create_groups_options"
+        app:showAsAction="never"
+        >
+
+    </item>
+
+    <item
+        android:title="Herramientas"
+        android:id="@+id/chat_setting_contact"
+        app:showAsAction="never"
+        >
+
+    </item>
+
+    <item
+        android:title="Cerrar sesion"
+        android:id="@+id/chat_logout_contact"
+        app:showAsAction="never"
+        >
+
+    </item>
+
+</menu>

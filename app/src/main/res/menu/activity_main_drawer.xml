@@ -17,11 +17,11 @@
         <item
             android:id="@+id/nav_playas"
             android:icon="@drawable/placeholder"
-            android:title="Mis playas" />
+            android:title="Localízate" />
         <item
             android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Ajustes" />
+            android:icon="@android:drawable/ic_menu_mylocation"
+            android:title="Mis playas" />
     </group>
 
     <item android:title="Communicate">

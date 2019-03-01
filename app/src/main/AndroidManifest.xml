@@ -16,7 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".ChatUsers"></activity>
+        <activity android:name=".GroupChatActivity"></activity>
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".ChatUsers" />
         <activity android:name=".PerfilUser" />
 
         <meta-data

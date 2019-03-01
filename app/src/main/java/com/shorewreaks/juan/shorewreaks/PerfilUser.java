@@ -38,6 +38,8 @@ public class PerfilUser extends AppCompatActivity implements NavigationView.OnNa
     private TextView tvNombreUser, tvEmail;
     private DatabaseReference mDatabase;
     private Button btnGuardar;
+    private FirebaseUser currentUser;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,8 @@ public class PerfilUser extends AppCompatActivity implements NavigationView.OnNa
         setContentView(R.layout.activity_perfil_user);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
 
         cambioVistaUser();
         cargarDatos();
@@ -212,8 +216,8 @@ public class PerfilUser extends AppCompatActivity implements NavigationView.OnNa
         } else if (id == R.id.nav_send) {
 
         } else if (id == R.id.logOut) {
-            Intent intent = new Intent(c, LoginScreen.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            mAuth.signOut();
+            Intent intent = new Intent(PerfilUser.this, LoginScreen.class);
             startActivity(intent);
         }
 
