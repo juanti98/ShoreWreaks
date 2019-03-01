@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.shorewreaks.juan.shorewreaks">
-
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
@@ -20,7 +25,9 @@
         <activity android:name=".SettingActivity" />
         <activity android:name=".ChatUsers" />
         <activity android:name=".PerfilUser" />
-
+        <activity
+            android:name=".InsidePlayas"
+            android:label="@string/title_activity_inside_playas"></activity>
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
