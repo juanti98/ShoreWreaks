@@ -129,8 +129,11 @@ public class ChatUsers extends AppCompatActivity {
 
         getMenuInflater().inflate(R.menu.option_menu, menu);
 
+
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
