@@ -67,7 +67,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "45561172240-aegan7qtr5n9l7qrluma2ues8050l866.apps.googleusercontent.com",
+          "client_id": "45561172240-a57p9cfvjt30psmidrm0g6h4tbq1qn27.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.shorewreaks.juan.shorewreaks",
@@ -80,14 +80,6 @@
           "android_info": {
             "package_name": "com.shorewreaks.juan.shorewreaks",
             "certificate_hash": "c80354a28a4c406bdda58adaca76a7c763481ef3"
-          }
-        },
-        {
-          "client_id": "45561172240-jgla1j0urvd99vbd56uc8rk9ish6lhie.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.shorewreaks.juan.shorewreaks",
-            "certificate_hash": "a71c07c5b6cd8b27c103ae309621a65945d77c84"
           }
         },
         {
