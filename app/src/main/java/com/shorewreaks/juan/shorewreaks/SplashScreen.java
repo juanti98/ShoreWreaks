@@ -6,6 +6,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -35,7 +36,7 @@ public class SplashScreen extends AppCompatActivity {
 //        Typeface myFont = Typeface.createFromAsset(getAssets(), "bromello.otf");
 //        myTitle.setTypeface(myFont);
 
-        Typeface typeface = getResources().getFont(R.font.merriweather);
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.merriweather);
         myTitle.setTypeface(typeface);
         mySubtitle.setTypeface(typeface);
 
