@@ -23,7 +23,6 @@ import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.HashMap;
 
-import androidx.test.espresso.remote.EspressoRemoteMessage;
 
 public class SettingActivity extends AppCompatActivity {
 

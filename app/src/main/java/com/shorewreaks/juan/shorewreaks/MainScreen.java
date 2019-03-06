@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -39,7 +40,6 @@ import ai.api.android.AIService;
 import ai.api.model.AIError;
 import ai.api.model.AIResponse;
 import ai.api.model.Result;
-import androidx.annotation.RequiresApi;
 
 import static android.Manifest.permission.RECORD_AUDIO;
 
