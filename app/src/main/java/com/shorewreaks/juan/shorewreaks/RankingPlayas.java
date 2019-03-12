@@ -2,14 +2,16 @@ package com.shorewreaks.juan.shorewreaks;
 
 public class RankingPlayas {
 
-    String nombre, direccion, localidad, provincia;
+    String nombre, direccion, localidad, provincia, lat, lon;
     double nota;
 
-    public RankingPlayas(String nombre, String direccion, String localidad, String provincia, double nota) {
+    public RankingPlayas(String nombre, String direccion, String localidad, String provincia, String lat, String lon, double nota) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.localidad = localidad;
         this.provincia = provincia;
+        this.lat = lat;
+        this.lon = lon;
         this.nota = nota;
     }
 
@@ -51,5 +53,21 @@ public class RankingPlayas {
 
     public void setNota(double nota) {
         this.nota = nota;
+    }
+
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
+    public String getLon() {
+        return lon;
+    }
+
+    public void setLon(String lon) {
+        this.lon = lon;
     }
 }

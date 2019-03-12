@@ -1,38 +1,37 @@
 package com.shorewreaks.juan.shorewreaks;
 
-import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.support.v4.widget.DrawerLayout;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Button;
 import android.widget.TextView;
+
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import ai.api.AIListener;
 import ai.api.android.AIConfiguration;
@@ -48,7 +47,7 @@ public class MainScreen extends AppCompatActivity
     private ListView lv_ranking;
     private Button bt_logout;
     private Context c;
-    private TextView tv_nombre1,tv_nombre2,tv_nombre3,tv_titulo;
+    private TextView tv_nombre1, tv_nombre2, tv_nombre3, tv_titulo;
     private ImageView img_copa;
 
     private AIService mAIService;
@@ -56,15 +55,13 @@ public class MainScreen extends AppCompatActivity
     private FirebaseUser currentUser;
     private FirebaseAuth mAuth;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
         cambioVistaUser();
-
-        ActivityCompat.requestPermissions(this, new String[]{RECORD_AUDIO},0);
+        ActivityCompat.requestPermissions(this, new String[]{RECORD_AUDIO}, 0);
 
         c = this;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -96,7 +93,8 @@ public class MainScreen extends AppCompatActivity
         findViewById(R.id.fab_microfono).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAIService.startListening();
+                //mAIService.startListening();
+                anadirPlaya();
             }
         });
 
@@ -112,6 +110,11 @@ public class MainScreen extends AppCompatActivity
 
     }
 
+
+    private void anadirPlaya() {
+        Intent intent = new Intent(MainScreen.this, MapasActivity.class);
+        startActivity(intent);
+    }
 
 
     private void cambioVistaUser() {
@@ -163,16 +166,15 @@ public class MainScreen extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             Intent intent = new Intent(c, MainScreen.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
 
         } else if (id == R.id.nav_perfil) {
             Intent intent = new Intent(c, PerfilUser.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
 
         } else if (id == R.id.nav_playas) {
-
 
 
         } else if (id == R.id.nav_manage) {
@@ -181,11 +183,10 @@ public class MainScreen extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
             Intent intent = new Intent(c, ChatUsers.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
 
-        }
-        else if (id == R.id.logOut) {
+        } else if (id == R.id.logOut) {
             mAuth.getInstance().signOut();
             Intent intentOut = new Intent(this, LoginScreen.class);
             intentOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -197,13 +198,13 @@ public class MainScreen extends AppCompatActivity
         return true;
     }
 
-        private void goLoginScreen() {
-            FirebaseAuth.getInstance().signOut();
-            LoginManager.getInstance().logOut();
-            Intent intent = new Intent(this, MainScreen.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }
+    private void goLoginScreen() {
+        FirebaseAuth.getInstance().signOut();
+        LoginManager.getInstance().logOut();
+        Intent intent = new Intent(this, MainScreen.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
