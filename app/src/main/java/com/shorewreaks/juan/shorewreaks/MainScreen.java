@@ -96,10 +96,15 @@ public class MainScreen extends AppCompatActivity
 
             }
         });
-
-        listaPlayas = fb.cogerPlayas();
         lv_ranking = findViewById(R.id.lv_ranking_playas);
-        adapter = new Adaptador(c, listaPlayas);
+
+        fb.cogerPlayas(new PlayasCallback() {
+            @Override
+            public void onPlayasLoaded(ArrayList<RankingPlayas> playas) {
+                adapter = new Adaptador(c, playas);
+                lv_ranking.setAdapter(adapter);
+            }
+        });
 
         findViewById(R.id.fab_microfono).setOnClickListener(new View.OnClickListener() {
             @Override

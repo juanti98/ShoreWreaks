@@ -88,14 +88,19 @@ public class MapasActivity extends FragmentActivity implements OnMapReadyCallbac
 
     private void cargarPuntos() {
         firebaseDatos fb = new firebaseDatos();
-        ArrayList<RankingPlayas> pts = fb.getPuntos();
-        if (pts.size() > 1){
-            for (int i = 0; i < pts.size(); i++){
-                LatLng punto = new LatLng(Double.parseDouble(pts.get(i).getLat()), Double.parseDouble(pts.get(i).getLon()));
-                mMap.addMarker(new MarkerOptions().position(punto).title(pts.get(i).getNombre()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(punto));
+        fb.getPuntos(new PlayasCallback() {
+            @Override
+            public void onPlayasLoaded(ArrayList<RankingPlayas> pts) {
+                if (pts.size() > 1){
+                    for (int i = 0; i < pts.size(); i++){
+                        LatLng punto = new LatLng(Double.parseDouble(pts.get(i).getLat()), Double.parseDouble(pts.get(i).getLon()));
+                        mMap.addMarker(new MarkerOptions().position(punto).title(pts.get(i).getNombre()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(punto));
+                    }
+                }
             }
-        }
+        });
+
     }
 
     private void anadirPunto(final double latitud, final double longitud) {

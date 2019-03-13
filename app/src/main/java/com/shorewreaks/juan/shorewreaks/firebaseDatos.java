@@ -45,8 +45,7 @@ public class firebaseDatos {
         this.listaPlayas = listaPlayas;
     }
 
-    public ArrayList<RankingPlayas> cogerPlayas() {
-        ArrayList<RankingPlayas> playasCompletas = new ArrayList<>();
+    public void cogerPlayas(final PlayasCallback callback) {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -64,7 +63,7 @@ public class firebaseDatos {
                     nota = ds.child("nota").getValue().toString();
                     playas.add(new RankingPlayas(nombre, direccion, localidad, provincia, lat, lon, Double.parseDouble(nota)));
                 }
-                setListaPlayas(playas);
+                callback.onPlayasLoaded(playas);
             }
 
             @Override
@@ -72,12 +71,9 @@ public class firebaseDatos {
 
             }
         });
-        playasCompletas = getListaPlayas();
-        return playasCompletas;
     }
 
-    public ArrayList<RankingPlayas> getPuntos() {
-        ArrayList<RankingPlayas> puntosPlayas = new ArrayList<>();
+    public void getPuntos(final PlayasCallback callback) {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -91,7 +87,7 @@ public class firebaseDatos {
                     lon = ds.child("lon").getValue().toString();
                     puntos.add(new RankingPlayas(nombre, lat, lon));
                 }
-                setPuntosPlayas(puntos);
+                callback.onPlayasLoaded(puntos);
             }
 
             @Override
@@ -99,7 +95,5 @@ public class firebaseDatos {
 
             }
         });
-        puntosPlayas = getPuntosPlayas();
-        return puntosPlayas;
     }
 }
