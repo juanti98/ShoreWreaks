@@ -13,7 +13,7 @@ import android.view.ViewGroup;
  */
 public class ChatFragment extends Fragment {
 
-
+/*
     public ChatFragment() {
         // Required empty public constructor
     }
@@ -25,5 +25,5 @@ public class ChatFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_chat, container, false);
     }
-
+*/
 }

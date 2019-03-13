@@ -13,7 +13,7 @@ import android.view.ViewGroup;
  */
 public class ContactsFragment extends Fragment {
 
-
+/*
     public ContactsFragment()
     {
         // Required empty public constructor
@@ -26,5 +26,5 @@ public class ContactsFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_contacts, container, false);
     }
-
+*/
 }

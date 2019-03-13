@@ -95,28 +95,28 @@
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/btnFacebook"
-        android:layout_width="267dp"
+        android:layout_width="253dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="532dp"
-        android:layout_marginEnd="69dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="536dp"
+        android:layout_marginEnd="78dp"
         android:layout_toEndOf="@+id/sign_in_button"
         android:textAlignment="textStart" />
 
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
-        android:layout_width="275dp"
-        android:layout_height="39dp"
+        android:layout_width="262dp"
+        android:layout_height="38dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="71dp"
-        android:layout_marginTop="477dp"
-        android:layout_marginEnd="65dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="484dp"
+        android:layout_marginEnd="73dp"
         android:visibility="visible">
 
     </com.google.android.gms.common.SignInButton>
