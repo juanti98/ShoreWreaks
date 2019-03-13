@@ -86,10 +86,7 @@ public class GroupChatActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 SaveMessageInfoToDatabase();
-
                 userMessageInput.setText("");
-
-                mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
             }
         });
 
@@ -143,7 +140,7 @@ public class GroupChatActivity extends AppCompatActivity {
 
     private void IniciarVistasMetodos()
     {
-        myToolbar = (Toolbar) findViewById(R.id.group_chat_bar_layout);
+        myToolbar = (Toolbar) findViewById(R.id.group_chat_bar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle("");
 
