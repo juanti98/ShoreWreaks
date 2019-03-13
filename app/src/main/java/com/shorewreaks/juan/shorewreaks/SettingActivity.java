@@ -33,6 +33,7 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.HashMap;
 
+
 public class SettingActivity extends AppCompatActivity {
 
     private Button btn_update_account;
