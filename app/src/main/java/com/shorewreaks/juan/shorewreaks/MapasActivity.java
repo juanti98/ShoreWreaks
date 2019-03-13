@@ -116,7 +116,7 @@ public class MapasActivity extends FragmentActivity implements OnMapReadyCallbac
                 lat = Double.toString(latitud);
                 lon = Double.toString(longitud);
                 playas = new RankingPlayas(nombre, direccion, localidad, provincia, lat, lon, 0);
-                mDatabase.child("Playas").push().setValue(playas);
+                mDatabase.child("playas").push().setValue(playas);
                 //cargarPuntos();
                 finish();
             }
