@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".GroupChatActivity">
 
-    <android.support.v7.widget.Toolbar
+  <!--  <android.support.v7.widget.Toolbar
         android:id="@+id/group_chat_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -20,6 +20,21 @@
             android:background="@android:drawable/ic_menu_revert"/>
 
     </android.support.v7.widget.Toolbar>
+    -->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/group_chat_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:itemIconTint="#7F171B"
+        app:itemTextColor="#7F171B"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/activity_main_drawer">
+
+    </android.support.design.widget.NavigationView>
 
     <ScrollView
         android:id="@+id/my_scrooll_view"
@@ -40,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:layout_marginEnd="2dp"
-                android:layout_marginBottom="50dp"
+                android:layout_marginBottom="60dp"
                 android:padding="10dp"
                 android:textAllCaps="false"
                 android:textColor="@color/colorPrimary"

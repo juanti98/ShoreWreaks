@@ -1,11 +1,13 @@
 package com.shorewreaks.juan.shorewreaks;
 
 import android.content.Intent;
+
+import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.transition.CircularPropagation;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,11 +21,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageMetadata;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.mikhaellopez.circularimageview.CircularImageView;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
+//import com.theartofdev.edmodo.cropper.CropImage;
+//import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.HashMap;
-
-import androidx.test.espresso.remote.EspressoRemoteMessage;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -35,6 +43,10 @@ public class SettingActivity extends AppCompatActivity {
     private String currentUserID;
     private FirebaseAuth mAuth;
     private DatabaseReference RootRef;
+
+    private static final int GalleryPick = 1;
+    private StorageReference StorageImageRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +55,9 @@ public class SettingActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
         RootRef = FirebaseDatabase.getInstance().getReference();
+        StorageImageRef = FirebaseStorage.getInstance().getReference();
+
+
 
         InitializeFields();
 
@@ -57,7 +72,23 @@ public class SettingActivity extends AppCompatActivity {
         RetrieveUserInfo();
 
         //Si el usuario ha creado un nombre, el EditText del UserName desaparece
-        userName.setVisibility(View.INVISIBLE);
+      //  userName.setVisibility(View.INVISIBLE);
+
+
+
+//añadir imagen
+        userProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK);
+                //galleryIntent.setAction();
+                galleryIntent.setType("image/*");
+                startActivityForResult(galleryIntent, GalleryPick);
+            }
+        });
+//-------------------------------------------
+
 
     }
 
@@ -72,6 +103,74 @@ public class SettingActivity extends AppCompatActivity {
 
     }
 
+//añadir imagen
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==GalleryPick && resultCode==RESULT_OK)
+        {
+            Uri uri = data.getData();
+            StorageReference filePath = StorageImageRef.child("image").child(uri.getLastPathSegment());
+            filePath.putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task)
+                {
+                    Toast.makeText(SettingActivity.this, "Profile image uploaded Succesfully", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+       /* {
+            Uri ImageUri = data.getData();
+
+            CropImage.activity()
+                    .setGuidelines(CropImageView.Guidelines.ON)
+                    .setAspectRatio(1,1)
+                    .start(this);
+        }
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE)
+        {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+
+            if (resultCode == RESULT_OK)
+            {
+                Uri resultUri = result.getUri();
+
+                StorageReference filePath = StorageImageRef.child(currentUserID +".jpg");
+
+                filePath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>()
+                {
+                    @Override
+                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task)
+                    {
+                        if (task.isSuccessful())
+                        {
+                            Toast.makeText(SettingActivity.this, "Profile image uploaded Succesfully", Toast.LENGTH_SHORT).show();
+
+                            final String downloadUrl = task.getResult().getDownloadUrl().toString();
+
+                            RootRef.child("Users).child(currentUserID).child("image")
+                            .setValue(downloadUrl)
+
+                        }
+                        else
+                        {
+                            String message = task.getException().toString();
+                            Toast.makeText(SettingActivity.this, "Error"+message, Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+            }
+
+        }*/
+
+    }
+
+//-----------------------------------------------------------------------
+
+    // En esta parte se sube el nombre de usuario y el estado a la BBDD
     private void UpdateSettings()
     {
         String setUserName = userName.getText().toString();
@@ -115,6 +214,7 @@ public class SettingActivity extends AppCompatActivity {
 
     }
 
+    //Esta parte lo muestra
     private void RetrieveUserInfo()
     {
         RootRef.child("UsersChat").child(currentUserID)
@@ -142,7 +242,8 @@ public class SettingActivity extends AppCompatActivity {
                         }
                         else
                         {
-                            userName.setVisibility(View.VISIBLE);
+                            //si el usuario no tiene un nombre de usuario se muestra para que lo añada
+                          //  userName.setVisibility(View.VISIBLE);
                             Toast.makeText(SettingActivity.this, "Please set & update your profile information...", Toast.LENGTH_SHORT).show();
 
                         }
@@ -155,6 +256,7 @@ public class SettingActivity extends AppCompatActivity {
                 });
     }
 
+    //manda al usuario a la pantalla de inicio del chat
     private void SendUserToChat()
     {
         Intent userIntent = new Intent(SettingActivity.this, ChatUsers.class);
