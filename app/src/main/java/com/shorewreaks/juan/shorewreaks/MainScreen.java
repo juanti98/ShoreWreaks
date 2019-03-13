@@ -32,6 +32,10 @@ import android.widget.TextView;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 
 import ai.api.AIListener;
 import ai.api.android.AIConfiguration;
@@ -45,6 +49,7 @@ import static android.Manifest.permission.RECORD_AUDIO;
 public class MainScreen extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private ListView lv_ranking;
+    private Adaptador adapter;
     private Button bt_logout;
     private Context c;
     private TextView tv_nombre1, tv_nombre2, tv_nombre3, tv_titulo;
@@ -56,6 +61,9 @@ public class MainScreen extends AppCompatActivity
     private FirebaseAuth mAuth;
 
 
+    private ArrayList<RankingPlayas> listaPlayas;
+    private firebaseDatos fb;
+    private DatabaseReference mDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +71,7 @@ public class MainScreen extends AppCompatActivity
 
         cambioVistaUser();
         ActivityCompat.requestPermissions(this, new String[]{RECORD_AUDIO}, 0);
-
+        fb = new firebaseDatos();
         c = this;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -76,7 +84,15 @@ public class MainScreen extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        lv_ranking = findViewById(R.id.lv_ranking_playas);
 
+        fb.cogerPlayas(new PlayasCallback() {
+            @Override
+            public void onPlayasLoaded(ArrayList<RankingPlayas> playas) {
+                adapter = new Adaptador(c, playas);
+                lv_ranking.setAdapter(adapter);
+            }
+        });
 
         findViewById(R.id.fab_microfono).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,11 +118,13 @@ public class MainScreen extends AppCompatActivity
     private void anadirPlaya() {
         Intent intent = new Intent(MainScreen.this, MapasActivity.class);
         startActivity(intent);
+        listaPlayas = fb.getListaPlayas();
+        adapter.setLista_rankings(listaPlayas);
+        adapter.notifyDataSetChanged();
     }
 
 
     private void cambioVistaUser() {
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
 
@@ -166,7 +184,8 @@ public class MainScreen extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_playas) {
-
+            Intent intent = new Intent(c, MapasActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_manage) {
 

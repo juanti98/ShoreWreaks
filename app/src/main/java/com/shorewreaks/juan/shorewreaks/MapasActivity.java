@@ -22,10 +22,14 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 
 public class MapasActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -82,6 +86,23 @@ public class MapasActivity extends FragmentActivity implements OnMapReadyCallbac
         };
     }
 
+    private void cargarPuntos() {
+        firebaseDatos fb = new firebaseDatos();
+        fb.getPuntos(new PlayasCallback() {
+            @Override
+            public void onPlayasLoaded(ArrayList<RankingPlayas> pts) {
+                if (pts.size() > 1){
+                    for (int i = 0; i < pts.size(); i++){
+                        LatLng punto = new LatLng(Double.parseDouble(pts.get(i).getLat()), Double.parseDouble(pts.get(i).getLon()));
+                        mMap.addMarker(new MarkerOptions().position(punto).title(pts.get(i).getNombre()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(punto));
+                    }
+                }
+            }
+        });
+
+    }
+
     private void anadirPunto(final double latitud, final double longitud) {
         AlertDialog.Builder constructor = new AlertDialog.Builder(this);
         constructor.setTitle("Añadir Punto");
@@ -116,8 +137,8 @@ public class MapasActivity extends FragmentActivity implements OnMapReadyCallbac
                 lat = Double.toString(latitud);
                 lon = Double.toString(longitud);
                 playas = new RankingPlayas(nombre, direccion, localidad, provincia, lat, lon, 0);
-                mDatabase.child("Playas").push().setValue(playas);
-                //cargarPuntos();
+                mDatabase.child("playas").push().setValue(playas);
+                cargarPuntos();
                 finish();
             }
         });
@@ -140,9 +161,10 @@ public class MapasActivity extends FragmentActivity implements OnMapReadyCallbac
      * installed Google Play services and returned to the app.
      */
     @Override
+
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        //cargarPuntos();
+        cargarPuntos();
 
         GoogleMap.OnMapClickListener oyente = new GoogleMap.OnMapClickListener() {
             @Override
