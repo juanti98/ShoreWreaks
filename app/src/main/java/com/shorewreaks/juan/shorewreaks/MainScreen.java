@@ -1,30 +1,21 @@
 package com.shorewreaks.juan.shorewreaks;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -33,16 +24,10 @@ import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-import ai.api.AIListener;
-import ai.api.android.AIConfiguration;
 import ai.api.android.AIService;
-import ai.api.model.AIError;
-import ai.api.model.AIResponse;
-import ai.api.model.Result;
 
 import static android.Manifest.permission.RECORD_AUDIO;
 
@@ -64,6 +49,7 @@ public class MainScreen extends AppCompatActivity
     private ArrayList<RankingPlayas> listaPlayas;
     private firebaseDatos fb;
     private DatabaseReference mDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,12 +103,22 @@ public class MainScreen extends AppCompatActivity
 
     private void anadirPlaya() {
         Intent intent = new Intent(MainScreen.this, MapasActivity.class);
-        startActivity(intent);
-        listaPlayas = fb.getListaPlayas();
-        adapter.setLista_rankings(listaPlayas);
-        adapter.notifyDataSetChanged();
+        startActivityForResult(intent, 56);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == 56 && resultCode == RESULT_OK) {
+            fb.cogerPlayas(new PlayasCallback() {
+                @Override
+                public void onPlayasLoaded(ArrayList<RankingPlayas> playas) {
+                    adapter = new Adaptador(c, playas);
+                    lv_ranking.setAdapter(adapter);
+                }
+            });
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     private void cambioVistaUser() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -160,7 +156,7 @@ public class MainScreen extends AppCompatActivity
         if (id == R.id.action_about) {
 
             Intent intentAbout = new Intent(MainScreen.this, AboutAs.class);
-            intentAbout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+            intentAbout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentAbout);
         }
 

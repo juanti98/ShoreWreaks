@@ -139,6 +139,7 @@ public class MapasActivity extends FragmentActivity implements OnMapReadyCallbac
                 playas = new RankingPlayas(nombre, direccion, localidad, provincia, lat, lon, 0);
                 mDatabase.child("playas").push().setValue(playas);
                 cargarPuntos();
+                setResult(RESULT_OK);
                 finish();
             }
         });
