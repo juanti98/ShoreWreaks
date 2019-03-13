@@ -188,7 +188,8 @@ public class MainScreen extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_playas) {
-
+            Intent intent = new Intent(c, MapasActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_manage) {
 

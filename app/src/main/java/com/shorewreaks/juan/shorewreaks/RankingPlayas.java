@@ -15,6 +15,12 @@ public class RankingPlayas {
         this.nota = nota;
     }
 
+    public RankingPlayas(String nombre, String lat, String lon) {
+        this.nombre = nombre;
+        this.lat = lat;
+        this.lon = lon;
+    }
+
     public String getNombre() {
         return nombre;
     }

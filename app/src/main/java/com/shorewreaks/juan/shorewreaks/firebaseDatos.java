@@ -14,11 +14,11 @@ import java.util.ArrayList;
 
 public class firebaseDatos {
     private DatabaseReference mDatabase;
-    private ArrayList<RankingPlayas> listaPlayas;
-
+    private ArrayList<RankingPlayas> listaPlayas, puntosPlayas;
 
     public firebaseDatos() {
         this.listaPlayas = new ArrayList<>();
+        this.puntosPlayas = new ArrayList<>();
     }
 
     public DatabaseReference getmDatabase() {
@@ -27,6 +27,14 @@ public class firebaseDatos {
 
     public void setmDatabase(DatabaseReference mDatabase) {
         this.mDatabase = mDatabase;
+    }
+
+    public ArrayList<RankingPlayas> getPuntosPlayas() {
+        return puntosPlayas;
+    }
+
+    public void setPuntosPlayas(ArrayList<RankingPlayas> puntosPlayas) {
+        this.puntosPlayas = puntosPlayas;
     }
 
     public ArrayList<RankingPlayas> getListaPlayas() {
@@ -66,5 +74,32 @@ public class firebaseDatos {
         });
         playasCompletas = getListaPlayas();
         return playasCompletas;
+    }
+
+    public ArrayList<RankingPlayas> getPuntos() {
+        ArrayList<RankingPlayas> puntosPlayas = new ArrayList<>();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<RankingPlayas> puntos = new ArrayList<>();
+                for(DataSnapshot ds: dataSnapshot.child("playas").getChildren()){
+                    String nombre, lat, lon;
+                    nombre = ds.child("nombre").getValue().toString();
+                    lat = ds.child("lat").getValue().toString();
+                    lon = ds.child("lon").getValue().toString();
+                    puntos.add(new RankingPlayas(nombre, lat, lon));
+                }
+                setPuntosPlayas(puntos);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        puntosPlayas = getPuntosPlayas();
+        return puntosPlayas;
     }
 }
