@@ -44,7 +44,7 @@ import androidx.annotation.RequiresApi;
 import static android.Manifest.permission.RECORD_AUDIO;
 
 public class MainScreen extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, AIListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
     private ListView lv_ranking;
     private Button bt_logout;
     private Context c;
@@ -78,27 +78,6 @@ public class MainScreen extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //DialogFlow
-
-        final AIConfiguration config = new AIConfiguration("499ca68207fa404a94eed99ecdd26d17",
-                AIConfiguration.SupportedLanguages.Spanish,
-                AIConfiguration.RecognitionEngine.System);
-
-        mAIService = AIService.getService(this, config);
-        mAIService.setListener(this);
-        mTextToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-
-            }
-        });
-
-        findViewById(R.id.fab_microfono).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAIService.startListening();
-            }
-        });
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -149,7 +128,10 @@ public class MainScreen extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_about) {
-            return true;
+
+            Intent intentAbout = new Intent(MainScreen.this, AboutAs.class);
+            intentAbout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentAbout);
         }
 
         return super.onOptionsItemSelected(item);
@@ -203,40 +185,5 @@ public class MainScreen extends AppCompatActivity
             startActivity(intent);
         }
 
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    @Override
-    public void onResult(AIResponse result) {
-        Result response = result.getResult();
-
-        mTextToSpeech.speak(response.getFulfillment().getSpeech(), TextToSpeech.QUEUE_FLUSH, null, null);
-
-
-    }
-
-    @Override
-    public void onError(AIError error) {
-
-    }
-
-    @Override
-    public void onAudioLevel(float level) {
-
-    }
-
-    @Override
-    public void onListeningStarted() {
-
-    }
-
-    @Override
-    public void onListeningCanceled() {
-
-    }
-
-    @Override
-    public void onListeningFinished() {
-
-    }
 
 }
