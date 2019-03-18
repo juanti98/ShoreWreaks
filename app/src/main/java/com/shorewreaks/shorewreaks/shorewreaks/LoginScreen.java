@@ -1,4 +1,4 @@
-package com.shorewreaks.juan.shorewreaks;
+package com.shorewreaks.shorewreaks.shorewreaks;
 
 import android.content.Context;
 import android.content.Intent;
@@ -39,7 +39,6 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.DatabaseReference;
 
 public class LoginScreen extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
     private LoginButton loginButton;

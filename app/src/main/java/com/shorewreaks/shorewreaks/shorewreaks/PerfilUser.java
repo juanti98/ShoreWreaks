@@ -1,4 +1,4 @@
-package com.shorewreaks.juan.shorewreaks;
+package com.shorewreaks.shorewreaks.shorewreaks;
 
 import android.content.Context;
 import android.content.Intent;
@@ -26,7 +26,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class PerfilUser extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
